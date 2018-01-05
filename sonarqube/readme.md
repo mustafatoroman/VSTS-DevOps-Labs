@@ -180,7 +180,7 @@ Now that the SonarQube server is running, we will modify VSTS build definition t
 1. Go to **Builds** under **Build and Release** tab, edit the build definition **SonarQube**. This is a Java application and we are using Maven to build the code. The Maven task in VSTS includes OOB support for SonarQube. All you need to is to point the SonarQube endpoint that you just created.
 
 
-3. Click on the **Maven** task and scroll down to the **Code Analysis** section. Configure the SonarQube settings as follows-
+2. Click on the **Maven** task and scroll down to the **Code Analysis** section. Configure the SonarQube settings as follows-
 
    <table width="100%">
    <thead>
@@ -206,7 +206,7 @@ Now that the SonarQube server is running, we will modify VSTS build definition t
    
 
 
-   <img src="images/build_configure.png">
+   <img src="images/build_configure.png"> 
 
 3. Save and queue the build.
 
@@ -265,7 +265,12 @@ The link will open the **MyShuttle** project in the SonarQube Dashboard.  Under 
 
   > In this example, along with the bug count, a character **D** is displayed which is known as **Reliability Rating**. **D** indicates that there is **atleast 1 critical bug** in this code. For more information on Reliability Rating, click <a href="https://docs.sonarqube.org/display/SONAR/Metric+Definitions#MetricDefinitions-Reliability">here</a>.
 
+
 1. Click on the **Bugs** count to see the details of the bug.
+
+   <img src="images/sonar_portal.png"> 
+
+   <br/>
 
    <img src="images/bug_details.png">
 
@@ -281,17 +286,17 @@ The link will open the **MyShuttle** project in the SonarQube Dashboard.  Under 
 
    Make the following changes in the code as shown:
 
-   - Import the below package.
-
-      >import java.io.Serializable;
-
-      <img src="images/code_import.png">
-
    - Go to line number **28** and replace the existing code with below snippet.
 
       >session.setAttribute("employeeList", (Serializable)fareList);
 
       <img src="images/code_edit.png">
+
+   - Import the below package.
+
+      >import java.io.Serializable;
+
+      <img src="images/code_import.png">
 
 4. Commit the changes.
 
