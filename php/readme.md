@@ -1,0 +1,131 @@
+# Deploy PHP application to Azure App Service using VSTS
+
+## Overview
+
+
+**PHP** is a server-side scripting language, and a powerful tool for making dynamic and interactive Web pages.
+
+This lab shows how to deploy **PHP** application to **Azure App** service using **Visual Studio Team Services**.
+
+
+## Pre-requisites
+
+ 1. **Microsoft Azure Account:**  You need a valid and active azure account for this lab.
+ 
+ 2.  You need a **Visual Studio Team Services Account** and <a href="https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate">Personal Access Token</a>
+
+ ## Setting Up the VSTS Project
+
+1. Use <a href="https://vstsdemogenerator.azurewebsites.net/?name=PHP&templateid=77365" target="_blank">VSTS Demo Data Generator</a> to provision a PHP project on your VSTS account.
+
+   <img src="images/vstsdemogen.png">
+
+
+2. Once the project is provisioned, click the URL to navigate to the project.
+
+   <img src="images/vsts_demogenerator_create.png">
+
+
+## Exercise 1: Endpoint Creation
+Since the connections are not established during project provisioning, we will manually create the endpoints.
+
+In VSTS, navigate to **Services** by clicking the gear icon <img src="images/gear.png"> , and click  **+ New Service Endpoint**. Select **Azure Resource Manager**. Specify connection name, select your subscription from the dropdown and click OK. We use this endpoint to connect VSTS with Azure.
+
+   <img src="images/services_endpoint.png">
+
+
+You will be prompted to authorize this connection with Azure credentials.
+
+**Note**: Disable pop-up blocker in your browser if you see a blank screen after clicking OK, and retry the step.
+
+## Exercise 2: Configure Release Definition 
+
+We will use ARM template as **Infrastructure as a Code**  in the release definition to provisions a Web App and a Web App Service Plan under the specified resource group.
+
+  >**Note** : You will encounter an error - **TFS.WebApi.Exception: Page not found** for Azure tasks in the steps **3** & **4** of this exercise. This is due to a recent change in the VSTS Release Management API. While we are working on updating VSTS Demo Generator to resolve this issue, you can fix this by typing a random text in the **Azure Subscription** field and click the **Refresh** icon next to it. Once the field is refreshed, you can select the endpoint from the drop down.
+ 
+1. Go to **Releases** under **Build and Release** tab, Select release definition **PHP** and click **Edit**
+
+   <img src="images/release_def.png"> 
+ 
+
+2. Go to **Tasks** and select **Dev** environment.
+
+   <img src="images/dev_release.png"> 
+
+3. Under **Azure Resource Group Deployment** task, update **Azure subscription** and **Location**.
+
+   <img src="images/azure_sub.png">
+
+4. Under **Azure App Service Deploy** task, update **Azure subscription** and click **Save**.
+
+   <img src="images/azure_app_service.png">
+
+   <table width="100%">
+   <thead>
+      <tr>
+         <th width="57%"><b>Tasks</b></th>
+         <th><b>Usage</b></th>
+      </tr>
+   </thead>
+   <tr>
+      <td><img src="images/azure_resource.png"><b>Azure Resource Group Deployment</b></td>
+      <td>Uses the provided ARM template to create a resource group with App Service plan and App Service  </td>
+   </tr>
+   <tr>
+      <td><img src="images/webapp.png"> <b>Azure App Service Deploy</b></td>
+      <td>deploys a PHP application to the created App service</td>
+   </tr>
+   <tr>
+  </table>
+
+## Exercise 3: Deploying the application
+
+**PHP** is an interpreted language, so we don't have to compile the code. Instead we will create an archive file which will be deployed to the Azure App Service. 
+
+Let's make a code change to trigger a CI-CD pipeline to build and deploy the application. 
+
+1. Go to **Code** tab and navigate to the below path to edit the file.
+
+   >php/config.php
+
+   <img src="images/code1.png">
+
+1. Go to line number **11**, modify **PHP** to **DevOps for PHP using VSTS** and commit the code.
+
+   <img src="images/code_editing.png">
+
+1. Go to **Builds** tab under **Build and Release** tab to see the associated CI build in progress.
+
+   <img src="images/build.png">  
+
+   <br/>
+
+   <img src="images/in_progress_build.png">  
+
+   Let's explore the build definition. The tasks used in the build definition are listed as shown. 
+
+  | Tasks | Usage |
+  | --- | --- |
+  | Archive files | We will archive all the files in the folder to a zip file |
+  | Copy Files | Copy the ARM template and the Zip file to the artifact folder  |
+  | Publish Build Artifacts |  Publish the build artifacts so that it is available to the Release pipeline  |
+ 
+1. Once the build is complete, it triggers the CD pipeline. You can notice the linked release is in progress by navigating to **Releases** under **Build and Release**.
+
+   ![Release in progress](images/release_in_progress.png) 
+
+The release will provision the Azure Web app and deploy the zip file generated by the associated build. Once the release succeeds, you can select the **Logs** to find the URL for the Web App that was provisioned.
+
+   <img src="images/release_logs.png"> 
+
+1. Alternatively, you can also login to the [Azure Portal](https://portal.azure.com) and navigate to the **Resource Group** that contains the Web App that was provisioned in the CD pipeline
+
+   <img src="images/azure.png">
+
+1. Select the **App Service** and from the **Overview** tab,  click **Browse** to see the application deployed.
+
+   <img src="images/website_php.png">
+
+## Feedback 
+Please let <a href="mailto:devopsdemos@microsoft.com">us</a> know if you have any feedback on this lab.

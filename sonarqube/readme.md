@@ -311,7 +311,7 @@ The link will open the **MyShuttle** project in the SonarQube Dashboard.  Under 
 
 ## Summary
 
-With  the **SonarQube** extension for **Visual Studio Team Services**, you can setup a CI build and automate the measurement of many metrics such as technical debt, code semantics, testing coverage. etc.
+With  the **SonarQube** extension for **Visual Studio Team Services**, you can embed automated testing in your CI/CD pipleine to automate the measurement of your technical debt including code semantics, testing coverage, vulnerabilities. etc.
 
 ## Feedback
 
