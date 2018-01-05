@@ -77,7 +77,7 @@ We will use ARM template as **Infrastructure as a Code**  in the release definit
       <td>deploys a PHP application to the created App service</td>
    </tr>
    <tr>
-  </table>
+   </table>
 
 ## Exercise 3: Deploying the application
 
