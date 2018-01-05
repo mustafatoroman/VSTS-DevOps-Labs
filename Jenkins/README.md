@@ -37,14 +37,13 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
     ![SSH Connection Info](images/vmconnect_ssh1.png)
 
-1. You will notice that by default the instance listens on port 8080 using HTTP. If you want to set up HTTPS communication, you will need to provide an SSL certificate. If you do not setup HTTPS communication, the best way to make sure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is to only log in using SSH tunneling. An SSH tunnel is an encrypted tunnel created through an SSH protocol connection, which can be used to transfer unencrypted traffic over an unsecured network. Simply run this command from a command prompt. 
-
-  >**Note:** You should have Putty.exe in the path or provide an absolute path of the putty.exe command    
+1. You will notice that by default the instance listens on port 8080 using HTTP. If you want to set up HTTPS communication, you will need to provide an SSL certificate. If you do not setup HTTPS communication, the best way to make sure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is to only log in using SSH tunneling. An SSH tunnel is an encrypted tunnel created through an SSH protocol connection, which can be used to transfer unencrypted traffic over an unsecured network. Simply run this command from a command prompt. **Note:** You should have Putty.exe in the path or provide an absolute path of the putty.exe command    
   
     ````
     putty.exe -ssh -L 8080:localhost:8080 <username>@<ip address>
-    ````
-    ![Connecting from Putty](images/ssh2.png)
+    ````    
+    
+ ![Connecting from Putty](images/ssh2.png)
 
 1. Login with the user name and password that you provided when you provisioned the VM.
 
