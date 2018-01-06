@@ -157,10 +157,10 @@ Let us create a project in Octopus to deploy the package to **Azure App Service*
 
 6. Populate the step template with required details -
 
-   - **Step Name**                   : A short, unique name for the template.
-   - **Package ID**                  : PHP (if you are providing different package ID, update it in **Package PHP** task of the build definition)
+   - **Step Name** : A short, unique name for the template.
+   - **Package ID** : PHP (if you are providing different package ID, update it in **Package PHP** task of the build definition)
    - **Azure account** & **Web App** : Select from the dropdown
-
+   <br/>
 
    <img src="images/PkgID.png">
 
@@ -193,9 +193,9 @@ In this exercise, we will create an **API** key in Octopus. This key is required
    <img src="images/Key.png">
 
 
-> In this lab, **VSTS Demo Generator** provides an automated way of linking Octopus Deploy with VSTS. Instead, if you want to link manually, then you can follow the below steps to achieve the same end result.
+   > In this lab, **VSTS Demo Generator** provides an automated way of linking Octopus Deploy with VSTS. Instead, if you want to link manually, then you can follow the below steps to achieve the same end result.
 
-4. Go to **VSTS project**, click on gear <img src="images/gear.png"> icon --> **Services --> + New Service Endpint**, scroll down and select **Octopus Deploy**
+4. Go to **VSTS project**, click on gear <img src="images/gear.png"> icon --> **Services --> + New Service Endpoint**, scroll down and select **Octopus Deploy**
 
    <img src="images/Endpoint.png">
 
@@ -238,34 +238,34 @@ In this exercise, we will package PHP application and push the package to Octopu
 
     <img src="images/Save.png">
 
-  <table width="100%">
-     <thead>
-      <tr>
-         <th width="50%"><b>Tasks</b></th>
-         <th><b>Usage</b></th>
-      </tr>
-     </thead>
-     <tr>
-        <td><img src="images/octopuspackage.png"><b>Package Application</b></td>
-        <td> We will package the PHP source code into a zip file with the version number</td>
-     </tr>
-     <tr>
-      <td><img src="images/copyfiles.png"><b>Copy Files</b></td>
-      <td> The Copy Files task will copy the generated package to artifacts directory in VSTS</td>
-     </tr>
-      <tr>
-        <td><img src="images/pushpackage.png"><b>Push packages to Octopus</b></td>
-        <td>The copied package will be pushed to Octopus server from VSTS artifacts directory</td>
-     <tr>
-      <td><img src="images/createoctopus.png"><b>Create Octopus Release</b></td>
-      <td>Automates the creation of release in Octopus server</td>
-     </tr>
-     <tr>
-      <td><img src="images/releaseoctopus.png"><b>Deploy Octopus Release</b></td>
-      <td>Automates the deployment of release in Octopus server</td>
-     </tr>
+    <table width="100%">
+        <thead>
+        <tr>
+            <th width="50%"><b>Tasks</b></th>
+            <th><b>Usage</b></th>
+        </tr>
+        </thead>
+        <tr>
+            <td><img src="images/octopuspackage.png"> <b>Package Application</b></td>
+            <td> We will package the PHP source code into a zip file with the version number</td>
+        </tr>
+        <tr>
+        <td><img src="images/copyfiles.png"><b>Copy Files</b></td>
+        <td> The Copy Files task will copy the generated package to artifacts directory in VSTS</td>
+        </tr>
+        <tr>
+            <td><img src="images/pushpackage.png"> <b>Push packages to Octopus</b></td>
+            <td>The copied package will be pushed to Octopus server from VSTS artifacts directory</td>
+        <tr>
+        <td><img src="images/createoctopus.png"> <b>Create Octopus Release</b></td>
+        <td>Automates the creation of release in Octopus server</td>
+        </tr>
+        <tr>
+        <td><img src="images/releaseoctopus.png"> <b>Deploy Octopus Release</b></td>
+        <td>Automates the deployment of release in Octopus server</td>
+        </tr>
 
-  </table>
+    </table>
 <br/>
 
 
