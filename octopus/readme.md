@@ -238,6 +238,8 @@ In this exercise, we will package PHP application and push the package to Octopu
 
     <img src="images/Save.png">
 
+    <br/>
+    
     <table width="100%">
         <thead>
         <tr>
