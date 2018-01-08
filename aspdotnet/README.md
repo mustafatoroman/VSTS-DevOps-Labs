@@ -1,6 +1,6 @@
-## Deploy ASP.NET application to Azure App Service using VSTS
+# Deploy ASP.NET application to Azure App Service using VSTS
 
-This lab shows how to deploy an <a href="https://www.asp.net/">ASP.NET</a> application to Azure App Service with Visual Studio Team Services.
+This lab shows how to deploy an [ASP.NET](https://www.asp.net/) application to Azure App Service with Visual Studio Team Services.
 
 ## Overview
 
@@ -10,25 +10,23 @@ ASP.NET is an open source web framework for building modern web apps and service
 
 1. **Microsoft Azure Account:** You will need a valid and an active azure account for this lab.
 
-2. You need a **Visual Studio Team Services Account** and <a href="https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate">Personal Access Token</a>
-
+2.You need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
 
 ## Setting up the VSTS Project
 
-1. Use <a href="https://vstsdemogenerator.azurewebsites.net/?name=PartsUnlimited" target="_blank">VSTS Demo Data Generator</a> to provision the project on your VSTS account.
+1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=PartsUnlimited) to provision the project on your VSTS account.
 
-   <img src="images/vsts_demo_site.png">
+   ![](images/vstsdemogen.png)
 
-2. Once the project is provisioned, click the URL to navigate to the project.
+1. Once the project is provisioned, click the URL to navigate to the project.
 
-   <img src="images/navigate_to_vsts.png">
-
+   ![](images/)
 
 ## Exercise 1: Endpoint Creation
 
 Since the connections are not established during project provisioning, we will manually create the endpoints.
 
-In VSTS, navigate to **Services** by clicking the gear icon <img src="images/gear.png"> and click **+ New Service Endpoint**. Select **Azure Resource Manager**. Specify **Connection name**, select your **Subscription** from the dropdown and click **OK**. We use this endpoint to connect **VSTS** with **Azure**.
+In VSTS, navigate to **Services** by clicking the gear icon ![](images/gear.png) and click **+ New Service Endpoint**. Select **Azure Resource Manager**. Specify **Connection name**, select your **Subscription** from the dropdown and click **OK**. We use this endpoint to connect **VSTS** with **Azure**.
 
    <img src="images/endpoint_creation.png">
 
