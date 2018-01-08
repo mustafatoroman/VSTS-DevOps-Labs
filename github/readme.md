@@ -29,9 +29,9 @@ You will learn how to deploy an **ASP.Net** application to Azure App Service usi
 
 1. **Microsoft Azure Account:** You will need a valid and active azure account for the lab
 
-2. You need a **Visual Studio Team Services Account** and <a href="https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate">Personal Access Token</a>
+1. You need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate).
 
-3. A **GitHub** account. If you don't have one already, you can setup <a href="https://github.com/join?source=header-home">GitHub Account</a> for free.
+1. A **GitHub** account. If you don't have one already, you can setup [GitHub Account](https://github.com/join?source=header-home) for free.
 
 ## Setting up the code repository on GitHub
 
@@ -39,7 +39,7 @@ There are many ways to add code to a GitHub repository. We can start with a new 
 
 1. Go to [**GitHub**](http://www.github.com) and make sure you are logged in with your GitHub user account.
 
-2. Navigate to the [**PartsUnlimitedE2E**](https://github.com/Microsoft/PartsUnlimitedE2E) repository and select **Fork** to your GitHub account.
+1. Navigate to the [**PartsUnlimitedE2E**](https://github.com/Microsoft/PartsUnlimitedE2E) repository and select **Fork** to your GitHub account.
 
    ![](images/8.png)
 
@@ -47,11 +47,11 @@ There are many ways to add code to a GitHub repository. We can start with a new 
 
 1. Use <a href="https://vstsdemogenerator.azurewebsites.net/?name=GitHub&templateid=77366" target="_blank">VSTS Demo Data Generator</a> to provision a project on your VSTS account.
 
-   <img src="images/1.png">
+   ![](images/1.png)
 
-2. Once the project is provisioned, click the URL to navigate to the project.
+1. Once the project is provisioned, click the URL to navigate to the project.
 
-   <img src="images/2.png">  
+   ![](images/2.png)  
 
 
 ## Exercise 1: Connecting VSTS to GitHub repository
@@ -60,41 +60,41 @@ There are many ways to add code to a GitHub repository. We can start with a new 
 
    ![](images/3.png)   
 
-2. Create a new GitHub connection by clicking on **+ New Service Endpoint** and click **GitHub**.
+1. Create a new GitHub connection by clicking on **+ New Service Endpoint** and click **GitHub**.
 
    ![](images/4.png) 
 
    >You will need to specify what authorization method you want to provide. If you choose **Grant Authorization**, the default option, as the authorization method, the dialog shows an **Authorize** button that opens the GitHub login page. If you select **Personal access token**, you must obtain a suitable token and paste it into the Token textbox. The dialog shows the recommended scopes for the token: ***repo, user, admin:repo_hook***. See [this page](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) on GitHub for information about obtaining an access token.
 
-3. Select **Grant Authorization**. Click on the **Authorize** button which opens the **GitHub login page**.
+1. Select **Grant Authorization**. Click on the **Authorize** button which opens the **GitHub login page**.
 
    Follow the steps required by GitHub to authorize access to your account.
 
-   <img src="images/21.png">
+   ![](images/21.png)
    <br/>
-   <img src="images/5.png">
+   ![](images/5.png)
 
    **Note:**  The authorization is in a new pop-up window, you may have to unblock the pop-up window in your browser.
 
-    <img src="images/22.png"> 
+    ![](images/22.png) 
 
-4. When access is granted, you will see a message that confirms the connection and you can name the connection accordingly and Click OK. 
+1. When access is granted, you will see a message that confirms the connection and you can name the connection accordingly and Click OK. 
 
-   <img src="images/6.png"> 
+   ![](images/6.png) 
 
-5. You will now see the service endpoint along with GitHub icon that you created under the **Endpoints** sub-tab.
+1. You will now see the service endpoint along with GitHub icon that you created under the **Endpoints** sub-tab.
 
-   <img src="images/7.png">  
+   ![](images/7.png)  
 
 ## Exercise 2: Configure Build
         
 1. Go to **Builds** under **Build & Release**. Click the ellipsis next to the build definition **GitHub** and choose **Edit**.
 
-   <img src="images/17.png">   
+   ![](images/17.png)   
 
-2. Click on **Get Sources** under the Tasks tab. Select **GitHub** as the source, confirm that the service endpoint connection created in #2 of the previous exercise shows up as a drop down value, select it. Select the appropriate **Repository** and choose the **master Branch** from which the source will be fetched. Save the build definition.
+1. Click on **Get Sources** under the Tasks tab. Select **GitHub** as the source, confirm that the service endpoint connection created in #2 of the previous exercise shows up as a drop down value, select it. Select the appropriate **Repository** and choose the **master Branch** from which the source will be fetched. Save the build definition.
 
-   <img src="images/19.png">
+   ![](images/19.png)
 
 ## Exercise 3: Configure Release
 
@@ -102,7 +102,7 @@ Since the connections are not established during project provisioning, we will m
 
 In VSTS, navigate to **Services** by clicking the gear icon ![](images/gear.png). Select **Azure Resource Manager** as the service endpoint. Specify Connection name, select your Subscription from the dropdown and click OK. We use this endpoint to connect VSTS with Azure.
 
-<img src="images/endpoint_creation.png">
+![](images/endpoint_creation.png)
 
 You will be prompted to authorize this connection with Azure credentials. Disable pop-up blocker in your browser if you see a blank screen after clicking OK, and retry the step.
 
@@ -111,19 +111,19 @@ You will be prompted to authorize this connection with Azure credentials. Disabl
 
 1. Go to Releases under Build & Release tab, edit the release definition GitHub.
 
-   <img src="images/39.png">
+   ![](images/39.png)
 
-2. Select Tasks and click **Dev**.
+1. Select Tasks and click **Dev**.
 
-   <img src="images/40.png">  
+   ![](images/40.png)  
 
-3. Under **Azure Resource Group Deployment** task, update Azure subscription with the endpoint component from the dropdown and select the desired location.
+1. Under **Azure Resource Group Deployment** task, update Azure subscription with the endpoint component from the dropdown and select the desired location.
 
-   <img src="images/41.png"> 
+   ![](images/41.png) 
 
-4. Under **Azure App Service Deploy** task, update Azure subscription with the endpoint component from the dropdown. Save the release definition.
+1. Under **Azure App Service Deploy** task, update Azure subscription with the endpoint component from the dropdown. Save the release definition.
 
-   <img src="images/42.png">  
+   ![](images/42.png)  
 
 
 ## Exercise 4: Triggering CI and CD 
@@ -134,62 +134,62 @@ Navigate to your forked GitHub repository. Let's make a simple change in the cod
 
    >PartsUnlimitedE2E/PartsUnlimited-aspnet45/src/PartsUnlimitedWebsite/Views/Home/Index.cshtml
 
-   <img src="images/13.png"> 
+   ![](images/13.png) 
 
-   <img src="images/14.png">
+   ![](images/14.png)
 
-2. Edit the code. For this example, let's change **line 28** to increase discount from **50%** to **70%**.
+1. Edit the code. For this example, let's change **line 28** to increase discount from **50%** to **70%**.
 
-3. Navigate to **Preview changes**, enter a commit message and click on **Commit Changes**.
+1. Navigate to **Preview changes**, enter a commit message and click on **Commit Changes**.
 
-   <img src="images/15.png"> 
+   ![](images/15.png) 
 
-4. The code commit will trigger a CI build. Go to the **Build** tab in your VSTS project to see the CI build in progress.
+1. The code commit will trigger a CI build. Go to the **Build** tab in your VSTS project to see the CI build in progress.
 
-5. Once the build is complete, you will see the summary which shows **Test Results** and **Code Coverage**.
+1. Once the build is complete, you will see the summary which shows **Test Results** and **Code Coverage**.
 
-   <img src="images/20.png">
+   ![](images/20.png)
 
 
    > The release uses **Infrastructure as a Code** to automate the provisioning of Azure App service and SQL Azure service. The release is configured to trigger upon successful completion of the CI build.
 
   
-6. Go to **Releases** tab under Build and Release hub. Select the **GitHub** definition, you will see a release in-progress.
+1. Go to **Releases** tab under Build and Release hub. Select the **GitHub** definition, you will see a release in-progress.
 
-   <img src="images/30.png">  
+   ![](images/30.png)  
 
-7. Let us explore the release definition. Click edit to see the release pipeline where the target environment is **Dev**.
+1. Let us explore the release definition. Click edit to see the release pipeline where the target environment is **Dev**.
 
-   <img src="images/25.png">  
+   ![](images/25.png)  
 
-8. This release definition uses the artifact (Webapp package and ARM template) of **CI Build** to deploy to Azure. Continuous Deployment condition has been enabled for this artifact.
+1. This release definition uses the artifact (Webapp package and ARM template) of **CI Build** to deploy to Azure. Continuous Deployment condition has been enabled for this artifact.
 
-   <img src="images/26.png"> 
+   ![](images/26.png) 
 
-9. Navigate to the **Dev** environment and you will see 2 tasks are used. Let us explore the tasks.
+1. Navigate to the **Dev** environment and you will see 2 tasks are used. Let us explore the tasks.
 
-    <img src="images/29.png">  
+    ![](images/29.png)  
 
-- **Azure Resource Group Deployment**: The project used in this lab has the **Azure App service** as its front-end and **Azure SQL DB service** as its back-end. We will provision these services as <a href="https://azure.microsoft.com/en-in/overview/what-is-paas/">PAAS</a> on Azure using <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-create-first-template">ARM templates</a>. This task will create the above services in a resource group.
+- **Azure Resource Group Deployment**: The project used in this lab has the **Azure App service** as its front-end and **Azure SQL DB service** as its back-end. We will provision these services as [PAAS](https://azure.microsoft.com/en-in/overview/what-is-paas/) on Azure using [ARM templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-create-first-template). This task will create the above services in a resource group.
 
 - **Azure App Service Deploy**: The task is used to deploy a Web project to the Azure App Service created above.
 
-    <img src="images/33.png">  
+    ![](images/33.png)  
 
 
-10. Once the release is complete, you will see the task-wise summary.
+1. Once the release is complete, you will see the task-wise summary.
 
-    <img src="images/35.png">  
+    ![](images/35.png)  
 
-    <img src="images/36.png">  
+    ![](images/36.png)  
 
-11. Login to <a href="https://portal.azure.com/">Azure Portal</a> and search for **Github** resource group.
+1. Login to [Azure Portal](https://portal.azure.com/) and search for **Github** resource group.
 
-    <img src="images/37.png">
+    ![](images/37.png)
 
-12. Navigate to either Dev or Staging web app in the resource group and you will see the application deployed successfully with the changes.
+1. Navigate to either Dev or Staging web app in the resource group and you will see the application deployed successfully with the changes.
 
-    <img src="images/38.png"> 
+    ![](images/38.png) 
 
 ## Summary
 
@@ -197,4 +197,4 @@ Whether your code lives in **Visual Studio Team Services** or **GitHub** (or bot
 
 ## Feedback
 
-Please let <a href="mailto: devopsdemos@microsoft.com" target=_blank>us</a> know if you have any feedback on this lab.
+Please let [us](mailto:devopsdemos@microsoft.com) know if you have any feedback on this lab.
