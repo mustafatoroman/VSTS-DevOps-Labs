@@ -1,4 +1,4 @@
-## Automate Deployments from VSTS to Octopus Deploy
+# Automate Deployments from VSTS to Octopus Deploy
 
 [Octopus Deploy](https://Octopus.com) is an automated deployment server that makes it easy to automate deployment of ASP.NET web applications, Java applications, NodeJS application and custom scripts to multiple environments.
 
