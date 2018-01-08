@@ -32,7 +32,7 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
 ## Setting up the VSTS project
 
-1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?TemplateId=77370&name=octopus) to provision the project on your VSTS account. 
+1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?TemplateId=77370&name=octopus) to provision the project on your VSTS account.
 
    ![](images/1.png)
 
@@ -60,9 +60,9 @@ In this lab, we are using Azure App Service as the deployment target.
 
 1. Click **Create environment** to go into the *Infrastructure* page. Once inside, click **Add Environment**.
 
-   ![](images/Create Environment.png)
+   ![](images/CreateEnvironment.png)
 
-   ![](images/Add Environment.png)
+   ![](images/AddEnvironment.png)
 
 1. Provide the environment name and click **Save**.
 
@@ -74,7 +74,7 @@ In this lab, we are using Azure App Service as the deployment target.
 
 1. Click on **ADD ACCOUNT** to link your Azure subscription to the created environment.
 
-   ![](images/Add Account.png)
+   ![](images/AddAccount.png)
 
 1. Octopus Deploy authenticates with Azure in one of two methods: using a **Management Certificate** or a **Service Principal**. To deploy to Azure Resource Manager (ARM), Octopus requires [**Azure Service Principal Account**](https://octopus.com/docs/infrastructure/azure/creating-an-azure-account/creating-an-azure-service-principal-account).
 
@@ -86,11 +86,11 @@ In this lab, we are using Azure App Service as the deployment target.
     - **Subscription ID**: Your [Azure Subscription ID](https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/)
     - **Authentication Method**: Choose **Use Management Certificate**
 
-   ![](images/Create Account.png)
+   ![](images/CreateAccount.png)
 
 1. Click **Save** and notice that a management certificate is generated. Download this certificate.
 
-   ![](images/Download Certificate.png)
+   ![](images/DownloadCertificate.png)
 
 1. To upload the certificate in Azure, go to [Azure Portal](https://portal.azure.com) and search for **Subscriptions**.
 
@@ -108,11 +108,11 @@ In this lab, we are using Azure App Service as the deployment target.
 
     ![](images/O11.png)
 
-    ![](images/O12.png"  height="400px)
+    ![](images/O12.png)
 
 1. Once the certificate is uploaded successfully, go back to Octopus portal and click **Save and Test**. If the test succeeds, you should be able to configure Octopus to deploy anything to Azure.
 
-    ![](images/Verification Success.png)
+    ![](images/VerificationSuccess.png)
 
 ## Exercise 2: Create Project in Octopus
 
@@ -124,7 +124,7 @@ Let us create a project in Octopus to deploy the package to **Azure App Service*
 
 1. Click on **ADD PROJECT**, provide the project name, description and click on **SAVE**.
 
-   ![](images/Add Project.png)
+   ![](images/AddProject.png)
 
    ![](images/PUProject.png)
 
@@ -134,7 +134,7 @@ Let us create a project in Octopus to deploy the package to **Azure App Service*
 
 1. Click on **ADD STEP** to see a list of built-in step templates, custom step templates, and community contributed step templates.
 
-   ![](images/Add Step.png)
+   ![](images/AddStep.png)
 
 1. **Search** for **Azure Web App** template and click **Add**.
 
@@ -162,7 +162,7 @@ In this exercise, we will create an **API** key in Octopus. This key is required
 
 1. In My Profile page click on **My API Keys** and click on **New API Key** to create a new key.
 
-   ![](images/API Key.png)
+   ![](images/APIKey.png)
 
 1. Give the **purpose** and click **Generate New**.
 
@@ -192,7 +192,7 @@ In this exercise, we will package PHP application and push the package to Octopu
 
 1. Go to **Builds** under **Build and Release** tab and click on **Octopus** build definition.
 
-   ![](images/Build Definition.png)
+   ![](images/BuildDefinition.png)
 
 1. **Edit** the build definition to update Octopus server endpoint.
 
