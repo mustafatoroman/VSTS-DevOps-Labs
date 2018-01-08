@@ -11,7 +11,7 @@
        
         "vmSize": {
             "type": "string",
-            "defaultValue": "Standard_D2",
+            "defaultValue": "Standard_D2_v2",
             "metadata": {
                 "description": "VM Size for Octopus Deploy Virtual Machine."
             }
@@ -66,7 +66,7 @@
                 "installer": {
                     "name": "[concat(variables('namespace'), '-vm/octopusDeployInstaller')]",
                     "fileUris": [
-                        "https://raw.githubusercontent.com/Microsoft/VSTS-DevOps-Labs/octopus/octopus/arm%20template/Install-OctopusDeploy.ps1"
+                        "https://raw.githubusercontent.com/Microsoft/VSTS-DevOps-Labs/master/octopus/arm%20template/Install-OctopusDeploy.ps1"
                     ],
                     "commandToExecute": "[concat('powershell.exe -File Install-OctopusDeploy.ps1 ', base64(variables('azureSql').database.connectionString), ' ', base64(variables('octopus').license.fullName), ' ', base64(variables('octopus').license.organisationName), ' ', base64(variables('octopus').license.emailAddress), ' ', base64(variables('octopus').credentials.admin.username), ' ', base64(variables('octopus').credentials.admin.password), ' 2>&1 > D:\\Install-OctopusDeploy.ps1.log ')]"
                 },
