@@ -49,8 +49,12 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
 1. Once you are connected successfully, open a browser and type [http://localhost:8080](http://localhost:8080)
 
+
+
 1. You will need to provide the initial admin password that Jenkins generates and saves it in a file on the server. 
     ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
+
+    **Note:** **At the time of writing this lab, an issue was noted in Jenkins where the setup wizard was broken and skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (covered in step #4 below)**
 
 1. Return to the **Putty** terminal password and type the following command to open the file that has the initial admin password. Copy the text
     >sudo vi /var/lib/jenkins/secrets/initialAdminPassword
@@ -62,9 +66,7 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
     ![Unlock Jenkins - First Time](images/jenkinsinitialpwd.png)
 
 
- **Note:** The next three steps might not be necessary in most cases as Jenkins on Azure is now automatically configured with the default options but should you need to configure further, here are the steps
-
-  Jenkins has a large ecosystem with a strong and active open source community users contributing several hundreds of useful plugins. When you setup Jenkins, you can start with installing the most commonly used plugins or select and install the ones that you want.
+    Jenkins has a large ecosystem with a strong and active open source community users contributing several hundreds of useful plugins. When you setup Jenkins, you can start with installing the most commonly used plugins or select and install the ones that you want.
 
 1. You will need the Maven plug-in which is not installed by default but we will do it later. For now, we will go with the suggested plugins. Select **Install suggested plugins**
 
