@@ -10,7 +10,7 @@ ASP.NET is an open source web framework for building modern web apps and service
 
 1. **Microsoft Azure Account:** You will need a valid and an active azure account for this lab.
 
-2.You need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
+1. You need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
 
 ## Setting up the VSTS Project
 
