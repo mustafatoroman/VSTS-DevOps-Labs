@@ -16,7 +16,7 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
 1. Click on **Deploy to Azure** to provision Octopus Server.
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Foctopus%2Foctopus%2Farm%2520template%2Ftemplate.json)![](http://azuredeploy.net/deploybutton.png)</a> 
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Foctopus%2Foctopus%2Farm%2520template%2Ftemplate.json">![](http://azuredeploy.net/deploybutton.png)</a>
 
 1. Provide **Resource group** and **Octopus DNS Name**, check the **Terms and Conditions** checkbox and click **Purchase**.
 
