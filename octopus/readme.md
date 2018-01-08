@@ -24,6 +24,12 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
 1. It takes approximately 15 minutes for the deployment to complete. Once the deployment is successful, resources including a Windows Server 2012 VM which hosts the **Octopus Deploy server**, an **Azure App Service** for the application deployment, a **SQL Server** with a **SQL Database** PaaS that acts as the backend of Octopus server is configured.
 
+   Use the below credentials to login to Octopus Server:
+   - **Username**: admin
+   - **Password**: P2ssw0rd@123
+
+   >This is required in the **Setting up the VSTS Project** exercise
+
     ![](images/Resources.png)
 
 1. Click the **octopus-vm** in the **Overview** section and note down the **Subscription ID**, **DNS name**. We will need these values in later exercises of this lab.
@@ -152,41 +158,7 @@ Let us create a project in Octopus to deploy the package to **Azure App Service*
 
 1. Clicking **Save** should define the project creation and its deployment process.
 
-## Exercise 3: Link VSTS and Octopus Deploy Server
-
-In this exercise, we will create an **API** key in Octopus. This key is required to link VSTS with Octopus. API keys allow you to access Octopus Deploy from VSTS without having to use your username and password.
-
-1. On the top right corner of Octopus portal, click on the currently logged in user and click **Profile**.
-
-   ![](images/userprofile.png)
-
-1. In My Profile page click on **My API Keys** and click on **New API Key** to create a new key.
-
-   ![](images/APIKey.png)
-
-1. Give the **purpose** and click **Generate New**.
-
-   ![](images/Generate new.png)
-
-1. Note down the API Key.
-
-   ![](images/Key.png)
-
-   > In this lab, **VSTS Demo Generator** provides an automated way of linking Octopus Deploy with VSTS. Instead, if you want to link manually, then you can follow the below steps to achieve the same end result.
-
-1. Go to **VSTS project**, click on gear ![](images/gear.png) icon --> **Services --> + New Service Endpoint**, scroll down and select **Octopus Deploy**
-
-   ![](images/Endpoint.png)
-
-1. Provide **Connection name**, **Octopus server URL** and **API Key** and click OK.
-
-   ![](images/endpointName.png)
-
-1. We will see the service endpoint created.
-
-   ![](images/EndpointSuccess.png)
-
-## Exercise 4: Triggering CI-CD
+## Exercise 3: Triggering CI-CD
 
 In this exercise, we will package PHP application and push the package to Octopus Server.
 
