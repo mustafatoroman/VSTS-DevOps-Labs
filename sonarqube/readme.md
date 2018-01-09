@@ -38,15 +38,15 @@ In this lab, you will learn how to setup SonarQube on Azure and to integrate Vis
 
    |Parameter Name| Description|
    |--------------|------------|
-   |Subscription Details|Choose the active Azure subscription, create a new resource group along with the location of creation|
-   |SQ_VM_Name|name of the VM where SonarQube will be installed|
-   |SQ_DNS_NAME|**unique** dns name to be provided with the following pattern:- **^[a-z][a-z0-9-]{1,61}[a-z0-9]$** or it will throw an error. For ex: sonarqubedns|
-   |SQ_VM_UserName|local admin account for the SonarQube VM|
-   |SQ_VM_UserPassword|password for the SonarQube VM|
-   |SQ_DBAdmin_UserName|admin account for Azure SQL Server|
-   |SQ_DBAdmin_Password|password for Azure SQL Server|
-   |_artifacts Location|This value will be automatically generated. Leave the field as it is|
-   |_artifacts Location Sas Token|The Sas Token will be automatically generated. Leave the field as it is|
+   |**Subscription Details**|Choose the active Azure subscription, create a new resource group along with the location of creation|
+   |**SQ_VM_Name**|name of the VM where SonarQube will be installed|
+   |**SQ_DNS_NAME**|**unique** dns name to be provided with the following pattern:- **^[a-z][a-z0-9-]{1,61}[a-z0-9]$** or it will throw an error. For ex: sonarqubedns|
+   |**SQ_VM_UserName**|local admin account for the SonarQube VM|
+   |**SQ_VM_UserPassword**|password for the SonarQube VM|
+   |**SQ_DBAdmin_UserName**|admin account for Azure SQL Server|
+   |**SQ_DBAdmin_Password**|password for Azure SQL Server|
+   |**_artifacts Location**|This value will be automatically generated. Leave the field as it is|
+   |**_artifacts Location Sas Token**|The Sas Token will be automatically generated. Leave the field as it is|
 
 1. After providing all of the required values in the above table, check the ***Terms & Conditions*** checkbox and click on the **Purchase button**.
 
