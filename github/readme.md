@@ -183,11 +183,7 @@ Navigate to your forked GitHub repository. Let's make a simple change in the cod
 
     ![](images/36.png)  
 
-1. Login to [Azure Portal](https://portal.azure.com/) and search for **Github** resource group.
-
-    ![](images/37.png)
-
-1. Navigate to either Dev or Staging web app in the resource group and you will see the application deployed successfully with the changes.
+1. Login to [Azure Portal](https://portal.azure.com/) and search for **Github** resource group. Click the web app in the resource group and you will see the application deployed successfully with the changes.
 
     ![](images/38.png) 
 
