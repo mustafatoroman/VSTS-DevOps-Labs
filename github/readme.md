@@ -45,7 +45,7 @@ There are many ways to add code to a GitHub repository. We can start with a new 
 
 ## Setting up VSTS project
 
-1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=GitHub&templateid=77366") to provision a project on your VSTS account.
+1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=GitHub&templateid=77366) to provision a project on your VSTS account.
 
    ![](images/1.png)
 
