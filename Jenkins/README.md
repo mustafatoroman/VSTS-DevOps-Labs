@@ -21,7 +21,7 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
 ## Setting up the project
 
-1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net) to provision a project on your VSTS account
+1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/Environment/Create?TemplateId=77371&TemplateName=MyShuttle_v1) to provision a project on your VSTS account
     
     ![VSTS Demo Gen](images/vstsdemogen-1.png)
 
