@@ -2,7 +2,7 @@
 
 [Jenkins](https://jenkins.io/) is a very popular Java based, open source continuous integration server that allows teams to continuously build applications across platforms.
 
-Visual Studio Team Services(VSTS) includes Team Build, a native CI build server that runs on Windows, Linux, Mac and allows building any application on these platforms. However, it also integrates well with Jenkins for teams who prefer to use Jenkins for CI.
+Visual Studio Team Services(VSTS) includes Team Build, a native CI build server that runs on Windows, Linux, Mac and allows building any application on these platforms. However, it also integrates well with Jenkins for teams who prefer to use or already using Jenkins for CI.
 
 This lab shows how you can integrate Team Services and Jenkins. In this lab, we will see how you can:
 
