@@ -14,17 +14,21 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
 1. Microsoft Azure Account:</b> You will need a valid and active azure account for the lab.
 
-1. You need a **Visual Studio Team Services Account** and <a href="http://bit.ly/2gBL4r4">Personal Access Token</a>
+1. You need a **Visual Studio Team Services Account** and <a href="https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate">Personal Access Token</a>
 
 1. You will need [Putty](http://www.putty.org/), a free SSH and Telnet client
 
 ## Setting up the project
 
-1. Use <a href="https://vstsdemogenerator.azurewebsites.net" target="_blank">VSTS Demo Data Generator</a> to provision a project on your VSTS account 
+1. Use <a href="https://vstsdemogenerator.azurewebsites.net/Environment/Create?TemplateId=77371&TemplateName=MyShuttle_v1" target="_blank">VSTS Demo Data Generator</a> to provision a project on your VSTS account
 
- 2. Select **MyShuttle** for the template. Provide the Project Name and select **Create Project**. After the project is provisioned, click the URL to navigate to the project.
+    ![VSTS Demo Gen](images/vstsdemogen-1.png)
 
-    Note: This URL will automatically select MyShuttle template in the demo generator. If you want to try other projects, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
+ 2. Select **MyShuttle_v1** for the template. Provide the Project Name and select **Create Project**. After the project is provisioned, click the URL to navigate to the project.
+
+    ![VSTS Demo Gen](images/vstsdemogen-2.png)
+
+    **Note:** This URL will automatically select MyShuttle template in the demo generator. If you want to try other projects, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
 
 
 ## Setting up Jenkins VM
