@@ -18,7 +18,7 @@ If you are not familiar with creating Selenium UI tests in Visual Studio, you ma
 
 1. Click **Deploy To Azure** to provision a Windows Server 2016 virtual machine along with SQL Express 2017 and browsers - Chrome and FireFox.
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Fmaster%2Fselenium%2Farm%2520template%2Fazure.deploy.json"> <img src="http://azuredeploy.net/deploybutton.png">
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Fmaster%2Fselenium%2Farm%2520template%2Fazuredeploy.json"> <img src="http://azuredeploy.net/deploybutton.png">
    </a>
 
 1. It should take approximately 20-25 minutes to provision the resources. Once the deployment is successful, you will see the resources as shown.
