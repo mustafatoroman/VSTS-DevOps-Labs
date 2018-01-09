@@ -28,6 +28,9 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 1. Select **MyShuttleJenkins** for the template
 
     ![VSTS Demo Gen](images/vstsdemogen-2.png)
+
+    **Note:** This URL will automatically select MuShuttle_v1 template in the demo generator. If you want to try other project templates, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
+
 ## Setting up Jenkins VM
 
 1. Let's set up Jenkins. We will use the VM image available on Azure MarketPlace that will install the latest stable Jenkins version on an Ubuntu Linux VM along with tools and plugins configured to work with Azure.
