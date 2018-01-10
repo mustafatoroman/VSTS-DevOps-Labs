@@ -20,7 +20,7 @@ ASP.NET is an open source web framework for building modern web apps and service
 
 1. Once the project is provisioned, click the URL to navigate to the project.
 
-   ![](images/)
+   ![](images/VSTSDemoGeneratorCreate.png)
 
 ## Exercise 1: Endpoint Creation
 
