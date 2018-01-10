@@ -24,11 +24,9 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
 1. It takes approximately 15 minutes for the deployment to complete. Once the deployment is successful, resources including a Windows Server 2012 VM which hosts the **Octopus Deploy server**, an **Azure App Service** for the application deployment, a **SQL Server** with a **SQL Database** PaaS that acts as the backend of Octopus server is configured.
 
-
     ![](images/Resources.png)
 
 1. Click the **octopus-vm** in the **Overview** section and note down the **DNS name** to access Octopus Server.
-
 
    ![](images/A3.png)
 
@@ -49,12 +47,12 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
    ![](images/APIKey.png)
 
 1. Give the **purpose** and click **Generate New**.
- 
+
    ![](images/Generate_new.png)
 
 1. Note down the API Key.
 
-   ![](images/Key.png) 
+   ![](images/Key.png)
 
 ## Setting up the VSTS project
 
