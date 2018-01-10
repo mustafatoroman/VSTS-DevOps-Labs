@@ -24,17 +24,37 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
 1. It takes approximately 15 minutes for the deployment to complete. Once the deployment is successful, resources including a Windows Server 2012 VM which hosts the **Octopus Deploy server**, an **Azure App Service** for the application deployment, a **SQL Server** with a **SQL Database** PaaS that acts as the backend of Octopus server is configured.
 
-   Use the below credentials to login to Octopus Server:
-   - **Username**: admin
-   - **Password**: P2ssw0rd@123
-
-   >This is required in the **Setting up the VSTS Project** exercise
 
     ![](images/Resources.png)
 
-1. Click the **octopus-vm** in the **Overview** section and note down the **Subscription ID**, **DNS name**. We will need these values in later exercises of this lab.
+1. Click the **octopus-vm** in the **Overview** section and note down the **DNS name** to access Octopus Server.
+
 
    ![](images/A3.png)
+
+1. Open a browser, enter the Octopus server URL using the VM's DNS name and below credentials:
+
+   - **Octopus Server URL** : http://<your_vm_dns_name>.\<location>.cloudapp.azure.com
+   - **Username**: admin
+   - **Password**: P2ssw0rd@123
+
+   ![](images/O1.png)
+
+1. From the Octopus Deploy web portal, and click on **Profile** under *User* menu.
+
+   ![](images/userprofile.png)
+
+1. Go to **MY API Key** and click **New API Key** to create.
+
+   ![](images/APIKey.png)
+
+1. Give the **purpose** and click **Generate New**.
+ 
+   ![](images/Generate_new.png)
+
+1. Note down the API Key.
+
+   ![](images/Key.png) 
 
 ## Setting up the VSTS project
 
@@ -42,7 +62,7 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
    ![](images/1.png)
 
-1. Provide the Project Name, the Octopus URL (VM's DNS URL) that was created previously, [API Key](https://octopus.com/docs/how-to/how-to-create-an-api-key) and click on Create Project. Once the project is provisioned, click the URL to navigate to the project.
+1. Provide the Project Name, the Octopus URL (VM's DNS URL) that was created previously, API Key and click on Create Project. Once the project is provisioned, click the URL to navigate to the project.
 
    ![](images/DemoGen.png)
 
@@ -56,15 +76,7 @@ Grouping your deployment targets by environment lets you define your deployment 
 
 In this lab, we are using Azure App Service as the deployment target.
 
-1. Open a browser, enter the Octopus server URL using the VM's DNS name and below credentials:
-
-   - **Octopus Server URL** : http://<your_vm_dns_name>.\<location>.cloudapp.azure.com
-   - **Username**: admin
-   - **Password**: P2ssw0rd@123
-
-   ![](images/O1.png)
-
-1. Click **Create environment** to go into the *Infrastructure* page. Once inside, click **Add Environment**.
+1. In Octopus portal, click **Create environment** to go into the *Infrastructure* page. Once inside, click **Add Environment**.
 
    ![](images/CreateEnvironment.png)
 
