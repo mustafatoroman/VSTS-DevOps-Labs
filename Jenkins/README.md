@@ -19,7 +19,7 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
 1. You will need [Putty](http://www.putty.org/), a free SSH and Telnet client
 
-## Setting up the project
+## Setting up VSTS project
 
 1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/Environment/Create?TemplateId=77371&TemplateName=MyShuttle_v1) to provision a project on your VSTS account
     
@@ -58,7 +58,7 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
-   **Note:** **At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #4 below)**
+   **Note:** **At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below)**
 
 1. Return to the **Putty** terminal password and type the following command to open the file that has the initial admin password. Copy the text
     >sudo vi /var/lib/jenkins/secrets/initialAdminPassword
@@ -122,11 +122,11 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
    ![Configuring VSTS Git URL](images/jenkins-vstsrepo.png)
 
-   **Note:** VSTS Git repos are private. So you will need to provide the credentials to access the repository. If you have not set the Git credentials, you can do it from VSTS
+   **Note:** VSTS Git repos are private. So you will need to provide the credentials to access the repository. If you have not set the Git credentials, you can do it from VSTS. Select the **Clone** link. Provide a user name and password and select **OK**
 
    ![Generating Git Credentials](images/vsts-generategitcreds.png)
 
-1. Select **Add | Jenkins** to add a new credential. Save the user name and password and click **Add** to close the wizard
+1. Select **Add | Jenkins** to add a new credential. Enter the user name and password created in the previous step and click **Add** to close the wizard
 
     ![Adding Credentials to Jenkins](images/jenkinscredentials.png)
 
@@ -202,7 +202,7 @@ Now you can try making a change and commit your code. Upon commit,VSTS will noti
 
 ## Deploying Jenkins Artifacts with Release Management
 
-You can Visual Studio Team Services Release Management to fetch the artifacts from the Jenkins server and deploy them. In this exercise below, we will configure VSTS to deploy the WAR file to Azure Web App Service.
+Next, we will configure Visual Studio Team Services Release Management to fetch the artifacts from the Jenkins server and deploy them
 
 1. First, you will need to create an endpoint to Azure and the Jenkins server. From the **Admin | Services** tab, select the **New Service Endpoint | Jenkins** button to create a new endpoint
 
@@ -232,7 +232,7 @@ You can Visual Studio Team Services Release Management to fetch the artifacts fr
 
 1. You are now ready to deploy!
 
-1. You can refer to the [Deploying Tomcat+MySQL application to Azure with VSTS]() if you want to continue with the deployment.
+1. You can refer to the [Deploying Tomcat+MySQL application to Azure with VSTS](../tomcat/) if you want to continue with the deployment.
 
 ## Feedback
 
