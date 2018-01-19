@@ -24,7 +24,7 @@ If you are following this lab from "Working with Jenkins, VSTS and Azure, you ca
 
     ![VSTS Demo Generator](images/vstsdemogen.png)
 
-1. Use  **MyShuttle** for the template. Provide the Project Name and select **Create Propject**. After the project is provisioned, click the URL to navigate to the project.
+1. Use  **MyShuttle_v1** for the template. Provide the Project Name and select **Create Project**. After the project is provisioned, click the URL to navigate to the project.
 
     >**Note:** This URL will automatically select Octopus template in the demo generator. If you want to try other projects, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
 
@@ -91,19 +91,16 @@ Next, navigate to the Web app that you have created. As we are deploying a Java 
 
     Next, we need to update the connection strings for the web app to connect to the database correctly. There are multiple ways you can do this - but for the purpose of this lab, we will take a simple approach. We will update it directly on the Azure portal.
 
-1. From the Azure portal, Select the Web app you provisioned. Select **Application Settings**. Scroll down to the **App Settings** section.
+1. From the Azure portal, Select the Web app you provisioned. Select **Application Settings**. Scroll down to the **Connection Strings** section
 
-1. Enter the following keys and values
+1. Add a new MySQL connection string with **MyShuttleDb** as the name and the following string for the value - `jdbc:mysql://{MySQL Server Name}:3306/alm?useSSL=true&requireSSL=false&user={your user name}&password={your password}`
 
-    |Key|Value|Example
-    ----|-----|------
-    |DB_USERNAME|Enter the MySQL server admin name|mysqldbuser@myshuttle-1-mysqldbserver
-    |DB_PASSWORD|Enter the MySQL server admin password|
-    |DB_SERVER|the MySQL server address|myshuttle-1-mysqldbserver.mysql.database.azure.com
+1. Click **Save** to save the connection string
 
-1. Click **Save** to save the added variables.
-
-    ![App Settings in Azure App Service](appsettings.png)
+   >**Note** - Connection Strings configured here will be available as environment variables, prefixed with connection type for Java apps (also for PHP, Python and Node apps). In the `DataAccess.java`file under `src/main/java/com/microsoft/example` folder, we retrieve the connection string using the following code
+    ````Java
+    String conStr = System.getenv("MYSQLCONNSTR_MyShuttleDb");
+    ````
 
 You have now setup and configured all the resources that is needed to deploy and run the MyShuttle application.
 
