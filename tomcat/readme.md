@@ -20,13 +20,13 @@ This lab will show how you can
 
 If you are following this lab from "Working with Jenkins, VSTS and Azure, you can skip this exercise. Otherwise,
 
-1. Provision a new VSTS project using the [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net)
+1. Provision a new VSTS project using the [VSTS Demo Data Generator](https://vstsdemobuildertest.azurewebsites.net/?TemplateId=77371&name=myshuttle)
 
     ![VSTS Demo Generator](images/vstsdemogen.png)
 
-1. Use  **MyShuttle_v1** for the template. Provide the Project Name and select **Create Project**. After the project is provisioned, click the URL to navigate to the project.
+1. Use  **MyShuttle** for the template. Provide the Project Name and select **Create Project**. After the project is provisioned, click the URL to navigate to the project.
 
-    >**Note:** This URL will automatically select Octopus template in the demo generator. If you want to try other projects, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
+    >**Note:** This URL will automatically select the MyShuttle template in the demo generator. If you want to try other projects, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
 
 ## Exercise 2: Creating Azure Web App and MySQL database
 
