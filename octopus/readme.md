@@ -70,55 +70,57 @@ Octopus Deploy has two components:
 
 1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?TemplateId=77370&name=octopus) to provision the project on your VSTS account.
 
-   ![](images/1.png)
+   ![VSTS Demo Generator](images/1.png)
 
-1. Provide a name for your project. Paste, the Octopus URL (VM's DNS URL) that was created previously, API Key and click on **Create Project**. Once the project is provisioned, click the URL to navigate to the project.
+1. Provide a name for your project. Paste, the Octopus URL (VM's DNS URL) that was created previously, API Key and click on **Create Project**. 
 
-   ![](images/DemoGen.png)
+1. Once the project is provisioned, click the URL to navigate to the project.
+
+   ![VSTS Demo Generator](images/DemoGen.png)
 
    >Note: This URL will automatically select Octopus template in the demo generator. If you want to try other projects, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
 
 ## Exercise 1: Configure Deployment Target in Octopus Server
 
-Let us create a deployment **environment** in Octopus server and link to Azure using **Management Certificate**. **Environments** are  deployment targets consisting of machines or services used by Octopus Deploy to deploy software. With Octopus Deploy, you can deploy software to Windows servers, Linux servers, Microsoft Azure, or even an offline package drop.
-
-Grouping your deployment targets by environment lets you define your deployment processes and have Octopus deploy the right versions of your software to the right environments at the right time.
+Next, let us define *environments*. In Octopus, an environment is a group of machines that you will deploy to at the same time; say *Dev*, *Test*, *Production* . Grouping your deployment targets by environment lets you define your deployment processes and have Octopus deploy the right versions of your software to the right environments at the right time.
 
 In this lab, we are using Azure App Service as the deployment target.
 
-1. In Octopus portal, click **Create environment** to go into the *Infrastructure* page. Once inside, click **Add Environment**.
+1. From the Octopus portal, select **Create environments** to go into the *Infrastructure* page
 
    ![](images/CreateEnvironment.png)
 
+1. Once inside, click **Add Environment**.
+
    ![](images/AddEnvironment.png)
 
-1. Provide the environment name and click **Save**.
+1. Let's call the environment *Dev*. Enter the name and click **Save**.
 
    ![](images/DevEnvironment.png)
 
-1. Octopus Deploy provides first-class support for deploying Azure Cloud Services and Azure Web Applications. To deploy software to Azure, you must add your Azure subscription to Octopus Deploy, and then use the built-in step templates to deploy to the cloud. Once the environment is created, click on **Accounts**.
+1. Next, we will need to add deployment targets. Since we are deploying to Azure, we will need to link Azure subscription to Octopus Deploy. Select **Accounts**.
 
-   ![](images/Dev.png)
+   ![Select Accounts](images/Dev.png)
 
-1. Click on **ADD ACCOUNT** to link your Azure subscription to the created environment.
+1. Select **ADD ACCOUNT** 
 
-   ![](images/AddAccount.png)
+   ![Add Account](images/AddAccount.png)
 
-1. Octopus Deploy authenticates with Azure in one of two methods: using a **Management Certificate** or a **Service Principal**. To deploy to Azure Resource Manager (ARM), Octopus requires [**Azure Service Principal Account**](https://octopus.com/docs/infrastructure/azure/creating-an-azure-account/creating-an-azure-service-principal-account).
-
-   [**Azure Management Certificate**](https://octopus.com/docs/infrastructure/azure/creating-an-azure-account/creating-an-azure-management-certificate-account) is used by Octopus to deploy to Cloud Services and Azure Web Apps.
+1. Octopus Deploy authenticates with Azure in one of two methods: 
+    * To deploy to Azure Resource Manager (ARM), Octopus requires [**Azure Service Principal Account**](https://octopus.com/docs/infrastructure/azure/creating-an-azure-account/creating-an-azure-service-principal-account)
+    * [**Azure Management Certificate**](https://octopus.com/docs/infrastructure/azure/creating-an-azure-account/creating-an-azure-management-certificate-account) is used by Octopus to deploy to Cloud Services and Azure Web Apps.
 
     Enter the following details -
 
-    - **Name**: Provide the account name (any name)
+    - **Name**: Provide an account name 
     - **Subscription ID**: Your [Azure Subscription ID](https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/)
     - **Authentication Method**: Choose **Use Management Certificate**
 
-   ![](images/CreateAccount.png)
+   ![Create Account](images/CreateAccount.png)
 
 1. Click **Save** and notice that a management certificate is generated. Download this certificate.
 
-   ![](images/DownloadCertificate.png)
+   ![Download Certificate](images/DownloadCertificate.png)
 
 1. To upload the certificate in Azure, go to [Azure Portal](https://portal.azure.com) and search for **Subscriptions**.
 
