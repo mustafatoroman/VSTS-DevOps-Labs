@@ -1,24 +1,32 @@
-# Automate Deployments from VSTS to Octopus Deploy
+# Automating Deployments with VSTS and Octopus Deploy
 
 [Octopus Deploy](https://Octopus.com) is an automated deployment server that makes it easy to automate deployment of ASP.NET web applications, Java applications, NodeJS application and custom scripts to multiple environments.
 
-Visual Studio Team Services already includes a first-class, powerful release management capability that simplifies deployment of any application to any platform. But teams who prefer or already have chosen Octopus deploy, can use the **[Octopus Deploy Integration](https://marketplace.visualstudio.com/items?itemName=octopusdeploy.octopus-deploy-build-release-tasks)** extension available on the Visual Studio Marketplace that provides Build and Release tasks to integrate Octopus Deploy with VSTS and TFS.
+Visual Studio Team Services includes a first-class, powerful release management capability that simplifies deployment of any application to any platform. But teams who prefer or already have chosen Octopus deploy, can use the **[Octopus Deploy Integration](https://marketplace.visualstudio.com/items?itemName=octopusdeploy.octopus-deploy-build-release-tasks)** extension available on the Visual Studio Marketplace that provides Build and Release tasks to integrate Octopus Deploy with Team Services and Team Foundation Server.
 
-This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate build and deployment application using a sample PHP application that will be deployed to an Azure App Service.
+This lab shows how you can integrate Team Build and Octopus to automate build and deployment application using a sample PHP application that will be deployed to an Azure App Service.
 
 ## Pre-requisites
 
 1. **Microsoft Azure Account:** You will need a valid and active azure account for the lab.
 
-1. You will need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
+1. You will need a **Visual Studio Team Services Account**. If you do not have one, you can sign up for free here- https://www.visualstudio.com/products/visual-studio-team-services-vs
+
+1. You will need a  [Personal Access Token] to set up your project using the Demo Generator.Please see this [article]((https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)) for instructions to create your token.
+
+    >**Note:**  You should treat Personal Access Tokens like passwords. It is recommended that you save them somewhere safe so that you can re-use them for future requests. 
 
 ## Setting up the Environment
 
-1. Click on **Deploy to Azure** to provision Octopus Server.
+Octopus Deploy has two components:
+* **Octopus Server** - a centralized web front-end that orchestrates deployments , and 
+* **Tentacle** - agent that needs to be on every target endpoint 
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Fmaster%2Foctopus%2Farm%2520template%2Fazuredeploy.json">![](http://azuredeploy.net/deploybutton.png)</a>
+ We will spin up a Octopus server on Azure. Click the **Deploy to Azure** button below to provision a Octopus Server.
 
-1. Provide **Resource group** and **Octopus DNS Name**, check the **Terms and Conditions** checkbox and click **Purchase**.
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Fmaster%2Foctopus%2Farm%2520template%2Fazuredeploy.json" target="_blank">![](http://azuredeploy.net/deploybutton.png)</a>
+
+1. Provide **Resource group** and **Octopus DNS Name**, and click **Purchase**, if you agree with the **Terms and Conditions** .
 
     ![](images/DeployOctopus.png)
 
@@ -26,41 +34,45 @@ This lab shows how you can integrate VSTS/TFS Team Build and Octopus to automate
 
     ![](images/Resources.png)
 
-1. Click the **octopus-vm** in the **Overview** section and note down the **DNS name** to access Octopus Server.
+1. Select the **octopus-vm**. In the **Overview** section, note the **DNS name**. We will use this to connect to the VM. Press the copy to clipboard button next to it. 
 
    ![](images/A3.png)
 
-1. Open a browser, enter the Octopus server URL using the VM's DNS name and below credentials:
+1. Open a new tab and enter `http://{your_vm_dns_name}` to access the Octopus Deploy server. Enter the following credentials and click **Sign In**
 
-   - **Octopus Server URL** : http://<your_vm_dns_name>.\<location>.cloudapp.azure.com
-   - **Username**: admin
-   - **Password**: P2ssw0rd@123
+   **Username**: admin   
+   **Password**: P2ssw0rd@123
 
    ![](images/O1.png)
 
-1. From the Octopus Deploy web portal, and click on **Profile** under *User* menu.
+ You will see the Octopus deploy web portal.
+    ![Octopus Dashboard](images/octopusportal.png)
 
-   ![](images/userprofile.png)
+1. From the Octopus Deploy portal, select **Profile** under *User* menu.
 
-1. Go to **MY API Key** and click **New API Key** to create.
+   ![User Profile](images/userprofile.png)
 
-   ![](images/APIKey.png)
+1. Select **My API Key** and click **New API Key** to create one. We will use the API Key to connect Octopus Deploy with Team Services
 
-1. Give the **purpose** and click **Generate New**.
+   ![Request New API Key](images/APIKey.png)
 
-   ![](images/Generate_new.png)
+1. Specify a **purpose**, for e.g., **VSTS Integration** and click **Generate New**.
 
-1. Note down the API Key.
+   ![Generate New API Key](images/Generate_new.png)
 
-   ![](images/Key.png)
+1. Copy the API Key to clipboard and save this somewhere as you may use it for future requests. 
 
-## Setting up the VSTS project
+   ![Generated API Key](images/Key.png)
+
+
+
+## Setting up Team Services project
 
 1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?TemplateId=77370&name=octopus) to provision the project on your VSTS account.
 
    ![](images/1.png)
 
-1. Provide the Project Name, the Octopus URL (VM's DNS URL) that was created previously, API Key and click on Create Project. Once the project is provisioned, click the URL to navigate to the project.
+1. Provide a name for your project. Paste, the Octopus URL (VM's DNS URL) that was created previously, API Key and click on **Create Project**. Once the project is provisioned, click the URL to navigate to the project.
 
    ![](images/DemoGen.png)
 
