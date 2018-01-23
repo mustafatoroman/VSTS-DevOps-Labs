@@ -140,13 +140,13 @@ In this lab, we are using Azure App Service as the deployment target.
 
     ![](images/O12.png)
 
-1. Once the certificate is uploaded successfully, go back to Octopus portal and click **Save and Test**. If the test succeeds, you should be able to configure Octopus to deploy anything to Azure.
+1. Once the certificate is uploaded successfully, go back to Octopus portal and click **Save and Test**. Once the verification is successful, we should be able to configure Octopus to deploy application packages to Azure.
 
     ![](images/VerificationSuccess.png)
 
 ## Exercise 2: Create Project in Octopus
 
-Let us create a project in Octopus to deploy the package to **Azure App Service**. A [**Project**](https://octopus.com/docs/deployment-process/projects) is a collection of deployment steps and configuration variables that define how your software is deployed.
+Let us create a Project in Octopus to deploy the package to **Azure App Service**. A [**Project**](https://octopus.com/docs/deployment-process/projects) is a collection of deployment steps and configuration variables that define how your software is deployed.
 
 1. Go to Octopus dashboard and click **Create a project**.
 
@@ -158,7 +158,7 @@ Let us create a project in Octopus to deploy the package to **Azure App Service*
 
    ![](images/PUProject.png)
 
-1. Once the project is created, click **Define your deployment process**. The [deployment process](https://octopus.com/docs/deploying-applications/deployment-process) is like a recipe for deploying your software.
+1. Once the project is created, click **Define your deployment process**. The [deployment process](https://octopus.com/docs/deploying-applications/deployment-process) is like a recipe for deploying your software. You define the recipe by adding steps and variables to a Project. Each step contains a specific action (or set of actions) that is executed as part of the deployment process each time your software is deployed.
 
    ![](images/Define Process.png)
 
@@ -184,7 +184,15 @@ Let us create a project in Octopus to deploy the package to **Azure App Service*
 
 ## Exercise 3: Triggering CI-CD
 
-In this exercise, we will package PHP application and push the package to Octopus Server.
+In this exercise, we will package PHP application and push the package to Octopus Server. We will use build tasks of **Octopus Deploy Integration** extension which was installed during Team Project provisioning.
+
+| Tasks                                     | Usage    |
+    |-------                                    | ------   |
+    |![](images/octopuspackage.png) **Package Application** | We will package the PHP source code into a zip file with the version number|
+    |![](images/copyfiles.png) **Copy Files**| The Copy Files task will copy the generated package to artifacts directory in VSTS|
+    |![](images/pushpackage.png) **Push packages to Octopus**| The copied package will be pushed to Octopus server from VSTS artifacts directory|
+    |![](images/createoctopus.png) **Create Octopus Release**|Automates the creation of release in Octopus server. A release captures all the project and package details to be deployed over and over in a safe and repeatable way|
+    |![](images/releaseoctopus.png) **Deploy Octopus Release**| Automates the deployment of release in Octopus server. A deployment is the execution of the steps to deploy a release to an environment. An individual release can be deployed numerous times to different environments|
 
 1. Go to **Builds** under **Build and Release** tab and click on **Octopus** build definition.
 
@@ -211,14 +219,6 @@ In this exercise, we will package PHP application and push the package to Octopu
 1. Save the build definition.
 
     ![](images/Save.png)
-
-    | Tasks                                     | Usage    |
-    |-------                                    | ------   |
-    |![](images/octopuspackage.png) **Package Application** | We will package the PHP source code into a zip file with the version number|
-    |![](images/copyfiles.png) **Copy Files**| The Copy Files task will copy the generated package to artifacts directory in VSTS|
-    |![](images/pushpackage.png) **Push packages to Octopus**| The copied package will be pushed to Octopus server from VSTS artifacts directory|
-    |![](images/createoctopus.png) **Create Octopus Release**|Automates the creation of release in Octopus server|
-    |![](images/releaseoctopus.png) **Deploy Octopus Release**| Automates the deployment of release in Octopus server|
 
 1. Go to **Code** tab and edit the file **functions.php**
 
