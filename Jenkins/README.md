@@ -1,40 +1,40 @@
 # Working with Jenkins
 
-[Jenkins](https://jenkins.io/) is a very popular Java based, open source continuous integration server that allows teams to continuously build applications across platforms.
+[Jenkins](https://jenkins.io/) is a very popular Java-based open source continuous integration (CI) server that allows teams to continuously build applications across platforms.
 
-Visual Studio Team Services(VSTS) includes Team Build, a native CI build server that runs on Windows, Linux, Mac and allows building any application on these platforms. However, it also integrates well with Jenkins for teams who prefer to use or already using Jenkins for CI.
+Visual Studio Team Services (VSTS) includes Team Build, a native CI build server that allows compilation of applications on Windows, Linux and Mac platforms. However, it also integrates well with Jenkins for teams who already use or prefer to use Jenkins for CI.
 
-There are two ways that you can integrate Team Services with Jenkins
+There are two ways to integrate VSTS with Jenkins
 
-* One way is to completely replace Team Services Build with Jenkins - i.e., You will configure a CI pipeline in Jenkins and configure a web hook in VSTS to run the job when a code is pushed by any or specific member to a repository and branch. You will configure Team Services Release Management to connect to Jenkins server, via Service Endpoint, to fetch the output of the job for deployment.
+* One way is to completely replace VSTS Build with Jenkins. This involves the configuration of a CI pipeline in Jenkins and a web hook in VSTS to invoke the CI process when source code is pushed by any member to a repository or a branch. The VSTS Release Management will be configured to connect to the Jenkins server through the configured Service Endpoint to fetch the compiled artifacts for the deployment.
 
-* An other way is to use Jenkins and Team Build together. In this approach, a Jenkins build will be nested within Team Services build. You will create a build definition in Team Services and use the **Jenkins** task to queue a job in Jenkins and download the artifacts produced by the job and publish it to Team Services or file from where where it can be picked by Release Management. This approach has multiple benefits -
+* The alternate way is to use Jenkins and Team Build together. In this approach, a Jenkins build will be nested within the VSTS build. A build definition will be configured in the VSTS with a **Jenkins** task to queue a job in Jenkins and download the artifacts produced by the job and publish it to the VSTS or any shared folder from where it can be picked by the Release Management. This approach has multiple benefits -
 
-    1. You can get end-to-end traceability from work item to code to build and release
-    1. You can trigger a CD when the build is completed successfully
-    1. You can run the build as part of your branch policy
+    1. End-to-end traceability from work item to source code to build and release
+    1. Triggering of a Continuous Deployment (CD) when the build is completed successfully
+    1. Execution of the build as part of the branching strategy
 
-This lab covers both the approaches. You will perform the following tasks
+This lab covers both the approaches and the following tasks will be performed
 
-* Provision Jenkins on Azure with an Azure Marketplace Template VM
-* Configure Jenkins to work with Maven and Team Services. 
+* Provision Jenkins on Azure VM using an Azure Marketplace Jenkins Template
+* Configure Jenkins to work with Maven and VSTS. 
 * Create a build definition in Jenkins
-* Configure Team Services to integrate with Jenkins
+* Configure VSTS to integrate with Jenkins
 * Setup Release Management in VSTS to deploy artifacts from Jenkins
 
 ## Pre-requisites
 
-1. Microsoft Azure Account:</b> You will need a valid and active azure account for the lab.
+1. Microsoft Azure Account: You will need a valid and active azure account for the lab.
 
-1. You need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
+1. You need a **VSTS** account and a [Personal Access Token (PAT)](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
 
 1. You will need [Putty](http://www.putty.org/), a free SSH and Telnet client
 
-1. You will need the **Docker Integration** extension installed and enabled in your VSTS account. You can do this later when you run the VSTS Demo Generator.
+1. You will need the **Docker Integration** extension installed and enabled for your VSTS account. You can perform this step later while using the VSTS Demo Generator.
 
-## Setting up Team Services project
+## Setting up the VSTS project
 
-1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=MyShuttleDocker&templateid=77373) to provision a project on your VSTS account
+1. Use [VSTS Demo Generator](https://vstsdemogenerator.azurewebsites.net/?name=MyShuttleDocker&templateid=77373) to provision a team project on the VSTS account
     
     ![VSTS Demo Gen](images/vstsdemogen-1.png)
 
@@ -42,11 +42,11 @@ This lab covers both the approaches. You will perform the following tasks
 
     ![VSTS Demo Gen](images/vstsdemogen-2.png)
 
-    **Note:** This URL will automatically select MuShuttleDocker template in the demo generator. If you want to try other project templates, use this URL instead - https://vstsdemogenerator.azurewebsites.net/
+    **Note:** Using the VSTS Demo Generator link will automatically select the MuShuttleDocker template in the demo generator for the team project creation. To use other project templates, use the alternate link provided below:  https://vstsdemogenerator.azurewebsites.net/
 
-## Setting up Jenkins VM
+## Setting up the Jenkins VM
 
-1. Let's set up Jenkins. We will use the VM image available on Azure MarketPlace that will install the latest stable Jenkins version on an Ubuntu Linux VM along with tools and plugins configured to work with Azure.
+1. To configure Jenkins, the Jenkins VM image available on the Azure MarketPlace will be used. This will install the latest stable Jenkins version on an Ubuntu Linux VM along with the tools and plugins configured to work with Azure.
 
     <a href="https://portal.azure.com/#create/azure-oss.jenkinsjenkins" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -181,7 +181,7 @@ This lab covers both the approaches. You will perform the following tasks
 
 1. Select the **Test Results** links if you want to see the results of the unit tests that were included in the build definition.
 
-## Approach 1: Running Jenkins without Team Services Build
+## Approach 1: Running Jenkins without VSTS Build
 
 In this section, we will cover the first approach. We will run Jenkins separately. We will configure a service hook in VSTS to trigger a Jenkins build whenever a code is pushed to a particular branch.
 
@@ -213,7 +213,7 @@ In this section, we will cover the first approach. We will run Jenkins separatel
 
 Now you can try making a change and commit your code. Upon commit,VSTS will notify Jenkins to initiate a new build.
 
-## Approach 2: Wrapping Jenkins Job within Team Services Build
+## Approach 2: Wrapping Jenkins Job within VSTS Build
 
 We will cover the second approach in this section. We will wrap the Jenkins job within a Team Build. The key benefit taking this approach is the end to end traceability from work item to code to build and release can be maintained
 
@@ -235,7 +235,7 @@ First, we will need to create an endpoint to the Jenkins server
 
     ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings.png)
 
-1.  Next, select the **Get Sources** task. Since, we  are only triggering a Jenkins job from the build, there is no need to download the code to the Team Services build agent. Select **Advanced Options** and check the "Don't sync sources** option
+1.  Next, select the **Get Sources** task. Since, we  are only triggering a Jenkins job from the build, there is no need to download the code to the VSTS build agent. Select **Advanced Options** and check the "Don't sync sources** option
 
     ![Get Sources Settings in Team Build](images/vsts-getsourcessettings.png)
 
@@ -249,13 +249,13 @@ First, we will need to create an endpoint to the Jenkins server
 
     ![Download Jenkins Artifact](images/downloadjenkinsartifact.png)
 
-1. Finally, we will publish the artifacts to Team Services. 
+1. Finally, we will publish the artifacts to VSTS. 
 
 1. Click **Save & queue** to save the build definition and start a new build. 
 
 ## Deploying Jenkins Artifacts with Release Management
 
-Next, we will configure Visual Studio Team Services Release Management to fetch and deploy the artifacts produced by the build.
+Next, we will configure Visual Studio VSTS Release Management to fetch and deploy the artifacts produced by the build.
 
 1. As we are deploying to Azure, we will need to create an endpoint to Azure. You should also create an endpoint to Jenkins, if you have not done it before
 
@@ -308,7 +308,7 @@ Next, we will configure Visual Studio Team Services Release Management to fetch 
 1. Select **Git plugin** in the search list and select **Install without Restart**
 
 
-## Installing Team Services Private agent
+## Installing VSTS Private agent
 
 1. From VSTS, select **Admin**|**Agent Queue**
 
