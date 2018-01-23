@@ -6,7 +6,7 @@ Visual Studio Team Services(VSTS) includes Team Build, a native CI build server 
 
 There are two ways that you can integrate Team Services with Jenkins
 
-* One way is to completely replace Team Services Build with Jenkins - i.e., You will configure a CI pipeline in Jenkins and configure a web hook in VSTS to run the job when a code is pushed by any or specific member to a repository and branch. You will configure Team Services Release Management to connect to Jenkins server, via service endpoint, to fetch the output of the job for deployment.
+* One way is to completely replace Team Services Build with Jenkins - i.e., You will configure a CI pipeline in Jenkins and configure a web hook in VSTS to run the job when a code is pushed by any or specific member to a repository and branch. You will configure Team Services Release Management to connect to Jenkins server, via Service Endpoint, to fetch the output of the job for deployment.
 
 * An other way is to use Jenkins and Team Build together. In this approach, a Jenkins build will be nested within Team Services build. You will create a build definition in Team Services and use the **Jenkins** task to queue a job in Jenkins and download the artifacts produced by the job and publish it to Team Services or file from where where it can be picked by Release Management. This approach has multiple benefits -
 
