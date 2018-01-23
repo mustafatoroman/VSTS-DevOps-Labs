@@ -4,7 +4,13 @@
 
 Visual Studio Team Services(VSTS) includes Team Build, a native CI build server that runs on Windows, Linux, Mac and allows building any application on these platforms. However, it also integrates well with Jenkins for teams who prefer to use or already using Jenkins for CI.
 
-This lab shows how you can integrate Team Services and Jenkins. In this lab, we will see how you can:
+There are two ways that you can integrate Team Services with Jenkins
+
+* One way is to completely replace Team Build with Jenkins - i.e., When the code is changed in VSTS, VSTS will notify Jenkins and Jenkins will run the build. When the Jenkins build is complete, Team Services Release Management can pick the published build artifacts and deploy them
+
+* An other way is to use Jenkins and Team Build together. In this approach, a Jenkins build will be wrapped within a build definition in Team Services. Team Services build will invoke and run the Jenkins job. 
+
+There are pros and cons in both approaches. This lab covers both approaches. You will perform the following tasks
 
 * Provision Jenkins on Azure with an Azure Marketplace Template VM
 * Setup a Jenkins build
@@ -19,13 +25,15 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
 1. You will need [Putty](http://www.putty.org/), a free SSH and Telnet client
 
-## Setting up VSTS project
+1. You will need the **Docker Integration** extension installed and enabled in your VSTS account. You can do it when you run the VSTS Demo Generator.
 
-1. Use [VSTS Demo Data Generator](https://vstsdemobuildertest.azurewebsites.net/?TemplateId=77373&Name=myshuttledocker) to provision a project on your VSTS account
+## Setting up Team Services project
+
+1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=MyShuttleDocker&templateid=77373) to provision a project on your VSTS account
     
     ![VSTS Demo Gen](images/vstsdemogen-1.png)
 
-1. Select **MyShuttleJenkins** for the template
+1. Select **MyShuttleDocker** for the template
 
     ![VSTS Demo Gen](images/vstsdemogen-2.png)
 
@@ -43,24 +51,26 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
     ![SSH Connection Info](images/vmconnect_ssh1.png)
 
-1. You will notice that by default the instance listens on port 8080 using HTTP. If you want to set up HTTPS communication, you will need to provide an SSL certificate. If you do not setup HTTPS communication, the best way to make sure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is to only log in using SSH tunneling. An SSH tunnel is an encrypted tunnel created through an SSH protocol connection, which can be used to transfer unencrypted traffic over an unsecured network. Simply run this command from a command prompt. **Note:** You should have Putty.exe in the path or provide an absolute path of the putty.exe command
-
+1. Jenkins, by default, listens on port 8080 using HTTP. If you want to set up HTTPS communication, you will need to provide an SSL certificate. If you do not setup HTTPS communication, the best way to make sure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is to only log in using SSH tunneling. An SSH tunnel is an encrypted tunnel created through an SSH protocol connection, which can be used to transfer unencrypted traffic over an unsecured network. Simply run this command from a command prompt.
     ````cmd
     putty.exe -ssh -L 8080:localhost:8080 <username>@<ip address>
     ````
     ![Connecting from Putty](images/ssh2.png)
 
+    **Note:** You should have Putty.exe in the path or provide an absolute path of the putty.exe 
+
+
 1. Login with the user name and password that you provided when you provisioned the VM.
 
-1. Once you are connected successfully, open a browser and type [http://localhost:8080](http://localhost:8080)
+1. Once you are connected successfully, open a browser on your host machine and type [http://localhost:8080](http://localhost:8080). You should see the Jenkins page. 
 
-1. You will need to provide the initial admin password that Jenkins generates and saves it in a file on the server.
+1. For security reasons, Jenkins will generate a password and save it in a file on the server. You will need to provide that initial password to unlock Jenkins.
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
    **Note:** **At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below)**
 
-1. Return to the **Putty** terminal password and type the following command to open the file that has the initial admin password. Copy the text
+1. Return to the **Putty** terminal and type the following command to open the log file that contains the password. Copy the password
     >sudo vi /var/lib/jenkins/secrets/initialAdminPassword
 
     *You can double click on the line and use **CTRL+C** copy the text and place it in the clipboard. Press **ESC and then :q!** to exit the vi editor without saving the file*
@@ -166,11 +176,11 @@ This lab shows how you can integrate Team Services and Jenkins. In this lab, we 
 
 1. Select the **Test Results** links if you want to see the results of the unit tests that were included in the build definition.
 
-## Configuring the build as Continuous Integration
+## Approach 1: Running Jenkins without Team Services Build
 
-In this section, let's see how you can configure a code change in VSTS to trigger a build in Jenkins
+In this section, we will cover the first approach. We will run Jenkins separately. We will configure a service hook in VSTS to trigger a Jenkins build whenever a code is pushed to a particular branch.
 
-1. Go to your VSTS project page and navigate to the admin  **Service Hooks** page
+1. Go to your VSTS project page and navigate to the **Admin** | **Service Hooks** page
 
     ![Navigate to service hooks page](images/servicehooks.png)
 
@@ -182,17 +192,15 @@ In this section, let's see how you can configure a code change in VSTS to trigge
 
 1. Select **Code pushed**  for the **Trigger on this of type event**
 
-1. Make sure you have selected the **MyShuttle** (or the correct repo) for which you have configured the build
-
-1. Select **Next**
+1. Choose the repository and branch and Select **Next**
 
    ![VSTS - Trigger Code Pushed](images/vsts-jenkinssubscription1.png)
 
 1. In the next page, select **Trigger generic build** for the perform action field
 
-1. Enter the URL of the Jenkins server in **http://ipaddress** or domain name format
+1. Enter the URL of the Jenkins server in **http://{ip address or the host name}**  format
 
-1. Enter **User name** and **Password** that you have setup for Jenkins
+1. Enter the **User name** and **Password** that you have setup for Jenkins
 
 1. Select **Test** to check the settings. If the settings are correct, click **Finish** to save and exit
 
@@ -200,23 +208,57 @@ In this section, let's see how you can configure a code change in VSTS to trigge
 
 Now you can try making a change and commit your code. Upon commit,VSTS will notify Jenkins to initiate a new build.
 
-## Deploying Jenkins Artifacts with Release Management
+## Approach 2: Wrapping Jenkins Job within Team Services Build
 
-Next, we will configure Visual Studio Team Services Release Management to fetch the artifacts from the Jenkins server and deploy them
+We will cover the second approach in this section. We will wrap the Jenkins job within a Team Build. The key benefit taking this approach is the end to end traceability from work item to code to build and release can be maintained
 
-1. First, you will need to create an endpoint to Azure and the Jenkins server. From the **Admin | Services** tab, select the **New Service Endpoint | Jenkins** button to create a new endpoint
+First, we will need to create an endpoint to the Jenkins server
 
-1. Provide the server URL and the user name and password (the credentials you provided for the first admin user). The server URL is in http://[server IP address or DNS name] format. Click **Verify Connection** to validate the entries and to confirm that VSTS is able to reach the Jenkins server
+1. From the **Admin | Services** tab, select the **New Service Endpoint | Jenkins** button to create a new endpoint
+
+1. Provide the server URL and the user name and password to connect to the server. The server URL is in http://[server IP address or DNS name] format. Click **Verify Connection** to validate the entries and to confirm that VSTS is able to reach the Jenkins server
 
    ![Jenkins Endpoint](images/jenkinsendpoint.png)
 
-    You are now ready to create a new release definition.
+1. Select **Builds** from the **Build and Release** help and select **+New** to create a new build Definition**
 
-1. Select the **Build & Release** hub and select **+ Create a new Release definition** to start creating a new release definition
+1. You will notice that there is a **Jenkins** template out-of-the-box. Select the template and click **Apply**
+
+    ![Jenkins Template](images/jenkinsbuildtemplate.png)
+
+1. In the *Build process* settings, select the Jenkins service endpoint that you created and enter **MyShuttle** for Jenkins Job Name.
+
+    ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings.png)
+
+1.  Next, select the **Get Sources** task. Since, we  are only triggering a Jenkins job from the build, there is no need to download the code to the Team Services build agent. Select **Advanced Options** and check the "Don't sync sources** option
+
+    ![Get Sources Settings in Team Build](images/vsts-getsourcessettings.png)
+
+1. Next, select the **Queue Jenkins Job** task. This task queues the job on the Jenkins server. Make sure that the services endpoint and the job name are correct.  You will see the two options checked- leave them as-is. 
+
+     ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings1.png)
+
+>The **Capture console output and wait for completion** option when selected, will capture the output of the Jenkins build console when the build runs, and also make the build  wait for the Jenkins Job to complete and return whether the job succeeded or failed. The **Capture pipeline output and wait for pipeline completion** option is very similar but applies to Jenkins pipelines (a build that has more than one job nested together). 
+
+1. When the build is complete, the **Jenkins Download Artifacts** task will download the build artifacts produced by the Jenkins job to the staging directory
+
+    ![Download Jenkins Artifact](images/downloadjenkinsartifact.png)
+
+1. Finally, we will publish the artifacts to Team Services. 
+
+1. Click **Save & queue** to save the build definition and start a new build. 
+
+## Deploying Jenkins Artifacts with Release Management
+
+Next, we will configure Visual Studio Team Services Release Management to fetch and deploy the artifacts produced by the build.
+
+1. As we are deploying to Azure, we will need to create an endpoint to Azure. You should also create an endpoint to Jenkins, if you have not done it before
+
+1. After you have created the endpoints, select the **Build & Release** hub and select **+ Create a new Release definition** to start creating a new release definition
 
 1. We will use the **Azure App Service Deployment** template as we are trying to publish a web application
 
-   ![New Release Defintion](images/newreleasedefintion.png)
+   ![New Release Definition](images/newreleasedefintion.png)
 
 1. We will name the default environment as **Dev**
 
