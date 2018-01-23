@@ -126,18 +126,18 @@ This lab covers both the approaches and the following tasks will be performed
 
 1. Click on the **Apply** button and then click the **Back to Dashboard** option to return to the home page.
 
-## Creating a new Build Job
+## Creating a new build job
 
-1. From Jenkins home page, select **New Item**. Enter a name for the build definition, and select **Maven project**. Click **OK** to save
+1. From Jenkins home page, click on the **New Item** option. Provide a name for the build definition, and select the **Maven project** and click **OK** to save
 
    ![](images/newbuilddef.png)
 
-1. Scroll down to the **Source code Management** section. Select **Git** and Enter the clone URL of your VSTS Git repo. It should be in **http://\<your account name>.visualstudio.com/
+1. Now scroll down to the **Source code Management** section. Select the **Git** option and provide the clone URL of the VSTS Git repo. It would be typically in the format **http://\<your account name>.visualstudio.com/
  \<your project name>/_git/MyShuttle**
 
    ![Configuring VSTS Git URL](images/jenkins-vstsrepo.png)
 
-   **Note:** VSTS Git repos are private. So you will need to provide the credentials to access the repository. If you have not set the Git credentials, you can do it from VSTS. Select the **Clone** link. Provide a user name and password and select **OK**
+   **Note:** The VSTS Git repos are private. So you will need to provide the user credentials to access the repository. If you have not set the Git credentials, you can so from the VSTS. Select the **Clone** link, provide the user name and password and then click on the **OK** button.
 
    ![Generating Git Credentials](images/vsts-generategitcreds.png)
 
