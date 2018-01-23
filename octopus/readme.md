@@ -186,13 +186,13 @@ Let us create a Project in Octopus to deploy the package to **Azure App Service*
 
 In this exercise, we will package PHP application and push the package to Octopus Server. We will use build tasks of **Octopus Deploy Integration** extension which was installed during Team Project provisioning.
 
-| Tasks                                     | Usage    |
-    |-------                                    | ------   |
-    |![](images/octopuspackage.png) **Package Application** | We will package the PHP source code into a zip file with the version number|
-    |![](images/copyfiles.png) **Copy Files**| The Copy Files task will copy the generated package to artifacts directory in VSTS|
-    |![](images/pushpackage.png) **Push packages to Octopus**| The copied package will be pushed to Octopus server from VSTS artifacts directory|
-    |![](images/createoctopus.png) **Create Octopus Release**|Automates the creation of release in Octopus server. A release captures all the project and package details to be deployed over and over in a safe and repeatable way|
-    |![](images/releaseoctopus.png) **Deploy Octopus Release**| Automates the deployment of release in Octopus server. A deployment is the execution of the steps to deploy a release to an environment. An individual release can be deployed numerous times to different environments|
+| Tasks| Usage|
+|-------| ------|
+|![](images/octopuspackage.png) **Package Application** | We will package the PHP source code into a zip file with the version number|
+|![](images/copyfiles.png) **Copy Files**| The Copy Files task will copy the generated package to artifacts directory in VSTS|
+|![](images/pushpackage.png) **Push packages to Octopus**| The copied package will be pushed to Octopus server from VSTS artifacts directory|
+|![](images/createoctopus.png) **Create Octopus Release**|Automates the creation of release in Octopus server. A release captures all the project and package details to be deployed over and over in a safe and repeatable way|
+|![](images/releaseoctopus.png) **Deploy Octopus Release**| Automates the deployment of release in Octopus server. A deployment is the execution of the steps to deploy a release to an environment. An individual release can be deployed numerous times to different environments|
 
 1. Go to **Builds** under **Build and Release** tab and click on **Octopus** build definition.
 
