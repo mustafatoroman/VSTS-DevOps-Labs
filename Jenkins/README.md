@@ -69,62 +69,62 @@ This lab covers both the approaches and the following tasks will be performed
 
 1. Once the connection is successful, open a browser on the host machine and navigate to the URL [http://localhost:8080](http://localhost:8080). The **Getting Started** page for Jenkins will be displayed. 
 
-1. For security reasons, Jenkins will generate a password and save it in a file on the server. The initial password needs to be provided in the **Getting Started** screen to unlock Jenkins. 
+1. The initial password needs to be provided in the **Getting Started** screen to unlock Jenkins. For security reasons, Jenkins will generate a password and save it in a file on the server. 
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
-   **Note:** **At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below)..**
+   **Note:** At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below).
 
 1. Return to the **Putty** terminal and type the following command to open the log file that contains the password. Copy the password
     >sudo vi /var/lib/jenkins/secrets/initialAdminPassword
 
-    *You can double click on the line and use **CTRL+C** copy the text and place it in the clipboard. Press **ESC and then :q!** to exit the vi editor without saving the file*
+    *You can double click on the line and use **CTRL+C** to copy the text and place it in the clipboard. Press **ESC and then :q!** to exit the vi editor without saving the file*
 
-1. Back in the browser, paste the text and select **Continue**
+1. Return to the browser, paste the copied text and click the **Continue** button.
 
     ![Unlock Jenkins - First Time](images/jenkinsinitialpwd.png)
 
-    Jenkins has a large ecosystem with a strong and active open source community users contributing several hundreds of useful plugins. When you setup Jenkins, you can start with installing the most commonly used plugins or select and install the ones that you want.
+    Jenkins has a vast ecosystem with a strong and active open source community users contributing hundreds of useful plugins. While configuring Jenkins, you can either install the most commonly used plugins or pick the plugins that you want.
 
-1. You will need the Maven plug-in which is not installed by default but we will do it later. For now, we will go with the suggested plugins. Select **Install suggested plugins**
+1. The Maven plugin is also required but will be installed later. For now, we will go with the suggested plugins. Click on the **Install suggested plugins** to initiate the configuration.
 
     ![Customize Jenkins Plugins](images/customizejenkins-plugins.png)
 
-1. You will need to create a new *Admin* user for Jenkins. Provide a user name and password and select **Continue**
+1. You will need to create a new *Admin* user for Jenkins. Provide a user name and password and click on the **Continue** button.
 
     ![Create Admin User for Jenkins](images/firstadminuser.png)
 
-1. Now, you have Jenkins ready to use. Select **Start using Jenkins**
+1. Jenkins will now be ready for use. Click on the **Start using Jenkins** button to start using it.
 
     ![Jenkins Ready](images/jenkinsready.png)
 
-## Installing and configuring Maven
+## Installing and Configuring Maven
 
- Starting from Jenkins version 2, Maven plugin is not installed by default.  You will need to do this manually
+ Starting with Jenkins version 2, Maven plugin is not installed by default. You will need to install this manually
 
-1. Select **Manage Jenkins** on the main page of the Jenkins portal.  This will take you to the Manage Jenkins page, the central one-stop-shop for all your Jenkins configuration. From this screen, you can configure your Jenkins server, install and upgrade plugins, keep track of system load, manage distributed build servers, and more!
+1. Select the **Manage Jenkins** option on the main page of the Jenkins portal. This will take you to the Manage Jenkins page, the centralized one-stop-shop for all the Jenkins configuration. From this screen, you can configure the Jenkins server, install and upgrade plugins, keep track of system load, manage distributed build servers, and more!
 
-1. Select **Manage Plugins**
+1. Select the **Manage Plugins** option
 
     ![Manage Jenkins](images/manage-jenkins1.png)
 
-1. Select **Available** tab and search **maven-plugin** in the filter box
+1. Select the **Available** tab and search for **maven-plugin** in the filter box
 
-1. Check **Maven Integration Plugin** and select **Install without restart** to install the plugin. Wait for the plug-in to be installed.
+1. Select the **Maven Integration Plugin** option and click on the **Install without restart** button to install the plugin. 
 
     ![Install Maven](images/installmavenplugin.png)
 
-1. Select **Manage Jenkins** and select **Global Tool Configuration**
+1. Once the plugin is installed, select the **Manage Jenkins** option and then select **Global Tool Configuration** option.
 
     ![Global Tool Configuration](images/manage-tools-config.png)
 
-1. You have added the Maven plugin for Jenkins but you have not installed Maven on the machine. Jenkins provides great out-of-the-box support for Maven.  You could  manually install Maven by extracting the ***tar*** file located in a shared folder. Alternatively, you can let Jenkins do all the hard work and download Maven for you. Select the **Install automatically** checkbox. Jenkins will download and install Maven from the Apache website the first time a build job needs it.
+1. Jenkins provides great out-of-the-box support for Maven. Since the Maven is not yet installed, it can be manually installed by extracting the ***tar*** file located in a shared folder. Alternatively, you can let Jenkins do all the hard work and download Maven for you. When the **Install automatically** option is selected, Jenkins will download and install Maven from the Apache website when a build job requires it, first time.
 
-    We will install version 3.5, the latest version at the time the lab is written
+    We will install Maven version 3.5, the latest version at the time the lab is written
 
     ![Maven Installer](images/maveninstallerconfig.png)
 
-1. Click **Apply** and select **Back to Dashboard** to return to the home page.
+1. Click on the **Apply** button and then click the **Back to Dashboard** option to return to the home page.
 
 ## Creating a new Build Job
 
