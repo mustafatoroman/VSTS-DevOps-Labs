@@ -37,9 +37,9 @@ After installing the extension, you will need to activate your project with an a
 
 In your Team project, under **Build and Release** section, go to **White Source Bolt** tab and activate **14-days** [trial license](https://www.whitesourcesoftware.com/whitesource_bolt_visualstudio_2017/#activate)
 
-If you are a Visual Studio Enterprise subscriber, you are entitled to 6-months free subscription. You can get your activation code from the [Visual Studio Enterprise benefit page](https://my.visualstudio.com/) and follow the [instructions](https://www.whitesourcesoftware.com/vse_whitesource_bolt//#activate)
-
 ![](images/Dev_Essentials.png)
+
+If you are a Visual Studio Enterprise subscriber, you are entitled to 6-months free subscription. You can get your activation code from the [Visual Studio Enterprise benefit page](https://my.visualstudio.com/) and follow the [instructions](https://www.whitesourcesoftware.com/vse_whitesource_bolt//#activate)
 
 ![](images/ActivateWhiteSourceBolt.png)
 
@@ -95,11 +95,11 @@ You can see the opensource license distribution and a detailed view of all compo
 
 WhiteSource Bolt also tracks outdated libraries in the project getting all the detailed information and links to newer versions and recommendations.
 
-![](images\Outdated Libraries.png)
+![](images\outdatedlibraries.png)
 
 ## Summary
 
-With VSTS and WhiteSource Bolt integration you can be rest assured having full control and visibility over your open source usage.
+With VSTS and WhiteSource Bolt integration you can *shift-left* your open source management. The integration allows you to have alert in real time on vulnerabilities and other issues to help you take immediate action.
 
 ## Feedback
 
