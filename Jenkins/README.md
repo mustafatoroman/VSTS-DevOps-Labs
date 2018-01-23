@@ -42,34 +42,34 @@ This lab covers both the approaches and the following tasks will be performed
 
     ![VSTS Demo Gen](images/vstsdemogen-2.png)
 
-    **Note:** Using the VSTS Demo Generator link will automatically select the MuShuttleDocker template in the demo generator for the team project creation. To use other project templates, use the alternate link provided below:  https://vstsdemogenerator.azurewebsites.net/
+    **Note:** Using the VSTS Demo Generator link will automatically select the MuShuttleDocker template in the demo generator for the team project creation. To use other team project templates, use the alternate link provided below:  https://vstsdemogenerator.azurewebsites.net/
 
 ## Setting up the Jenkins VM
 
-1. To configure Jenkins, the Jenkins VM image available on the Azure MarketPlace will be used. This will install the latest stable Jenkins version on an Ubuntu Linux VM along with the tools and plugins configured to work with Azure.
+1. To configure Jenkins, the Jenkins VM image available on the Azure MarketPlace will be used. This will install the latest stable Jenkins version on a Ubuntu Linux VM along with the tools and plugins configured to work with Azure.
 
     <a href="https://portal.azure.com/#create/azure-oss.jenkinsjenkins" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
     </a>
 
-1. Once the machine is provisioned, click **Connect** and note down the \<username> and \<ip address>. We will need this to connect to the VM from ***Putty***
+1. Once the Jenkins VM is provisioned, click on the **Connect** button and make a note of the \<username> and the \<ip address>. This information will be required toconnect to the Jenkins VM from ***Putty***
 
     ![SSH Connection Info](images/vmconnect_ssh1.png)
 
-1. Jenkins, by default, listens on port 8080 using HTTP. If you want to set up HTTPS communication, you will need to provide an SSL certificate. If you do not setup HTTPS communication, the best way to make sure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is to only log in using SSH tunneling. An SSH tunnel is an encrypted tunnel created through an SSH protocol connection, which can be used to transfer unencrypted traffic over an unsecured network. Simply run this command from a command prompt.
+1. Jenkins, by default, listens on port 8080 using HTTP. To configure a secure HTTPS connection, an SSL certificate would be required. If HTTPS communication is not being configured, the best way to ensure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is by logging in using the SSH tunneling. An SSH tunnel is an encrypted tunnel created through a SSH protocol connection, that can be used to transfer unencrypted traffic over an unsecured network. To initiate a SSH tunnel, the following command needs to be run from a Command Prompt.
     ````cmd
     putty.exe -ssh -L 8080:localhost:8080 <username>@<ip address>
     ````
     ![Connecting from Putty](images/ssh2.png)
 
-    **Note:** You should have Putty.exe in the path or provide an absolute path of the putty.exe 
+    **Note:** To initiate the above command, the Putty.exe needs to be placed in the path selected in the Command Prompt or the absolute path of the Putty.exe need to be provided in the command. 
 
 
-1. Login with the user name and password that you provided when you provisioned the VM.
+1. Login with the user name and password that was provided during the provisioning of the VM.
 
-1. Once you are connected successfully, open a browser on your host machine and type [http://localhost:8080](http://localhost:8080). You should see the Jenkins page. 
+1. Once the connection is successful, open a browser on the host machine and navigate to the URL [http://localhost:8080](http://localhost:8080). The **Getting Started** page for Jenkins will be displayed. 
 
-1. For security reasons, Jenkins will generate a password and save it in a file on the server. You will need to provide that initial password to unlock Jenkins.
+1. For security reasons, Jenkins will generate a password and save it in a file on the server. The initial password needs to be provided in the **Getting Started** screen to unlock Jenkins. 
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
