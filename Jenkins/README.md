@@ -6,15 +6,20 @@ Visual Studio Team Services(VSTS) includes Team Build, a native CI build server 
 
 There are two ways that you can integrate Team Services with Jenkins
 
-* One way is to completely replace Team Build with Jenkins - i.e., When the code is changed in VSTS, VSTS will notify Jenkins and Jenkins will run the build. When the Jenkins build is complete, Team Services Release Management can pick the published build artifacts and deploy them
+* One way is to completely replace Team Services Build with Jenkins - i.e., You will configure a CI pipeline in Jenkins and configure a web hook in VSTS to run the job when a code is pushed by any or specific member to a repository and branch. You will configure Team Services Release Management to connect to Jenkins server, via service endpoint, to fetch the output of the job for deployment.
 
-* An other way is to use Jenkins and Team Build together. In this approach, a Jenkins build will be wrapped within a build definition in Team Services. Team Services build will invoke and run the Jenkins job. 
+* An other way is to use Jenkins and Team Build together. In this approach, a Jenkins build will be nested within Team Services build. You will create a build definition in Team Services and use the **Jenkins** task to queue a job in Jenkins and download the artifacts produced by the job and publish it to Team Services or file from where where it can be picked by Release Management. This approach has multiple benefits -
 
-There are pros and cons in both approaches. This lab covers both approaches. You will perform the following tasks
+    1. You can get end-to-end traceability from work item to code to build and release
+    1. You can trigger a CD when the build is completed successfully
+    1. You can run the build as part of your branch policy
+
+This lab covers both the approaches. You will perform the following tasks
 
 * Provision Jenkins on Azure with an Azure Marketplace Template VM
-* Setup a Jenkins build
-* Configure Team Services to trigger Jenkins upon code change
+* Configure Jenkins to work with Maven and Team Services. 
+* Create a build definition in Jenkins
+* Configure Team Services to integrate with Jenkins
 * Setup Release Management in VSTS to deploy artifacts from Jenkins
 
 ## Pre-requisites
@@ -25,7 +30,7 @@ There are pros and cons in both approaches. This lab covers both approaches. You
 
 1. You will need [Putty](http://www.putty.org/), a free SSH and Telnet client
 
-1. You will need the **Docker Integration** extension installed and enabled in your VSTS account. You can do it when you run the VSTS Demo Generator.
+1. You will need the **Docker Integration** extension installed and enabled in your VSTS account. You can do this later when you run the VSTS Demo Generator.
 
 ## Setting up Team Services project
 
@@ -68,7 +73,7 @@ There are pros and cons in both approaches. This lab covers both approaches. You
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
-   **Note:** **At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below)**
+   **Note:** **At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below)..**
 
 1. Return to the **Putty** terminal and type the following command to open the log file that contains the password. Copy the password
     >sudo vi /var/lib/jenkins/secrets/initialAdminPassword
@@ -276,6 +281,54 @@ Next, we will configure Visual Studio Team Services Release Management to fetch 
 
 1. You can refer to the [Deploying Tomcat+MySQL application to Azure with VSTS](../tomcat/) if you want to continue with the deployment.
 
-## Feedback
 
-We will appreciate your feedback. Please send your feedback and suggestions to [devopsdemos@microsoft.com](mailto:devopsdemos@microsoft.com)
+## Logging into Jenkins with the default credentials
+
+1. To log in to Jenkins when you did not get a chance to configure the initial admin, you can use the default user name **admin**
+
+1. Copy and paste the password text from `\var\lib\jenkins\secrets\initialAdminPassword` 
+
+1. To change password, click on the user name on the top-right 
+
+1. Select **Configure**. Scroll down to the **password** section. Specify a new password and click **Save**
+
+
+# Appendix
+
+## Installing Git Plugin
+
+1. From the main page of the Jenkins portal, select **Manage Jenkins** and then select **Manage Plugins**
+
+    ![Manage Jenkins](images/manage-jenkins2.png)
+
+1. Select the **Available** tab. 
+
+1. Enter **Git plugin** in the filter textbox 
+
+1. Select **Git plugin** in the search list and select **Install without Restart**
+
+
+## Installing Team Services Private agent
+
+1. From VSTS, select **Admin**|**Agent Queue**
+
+1. Select **Download agent**
+
+    ![Agent Queue](images/vsts-agentqueue.png)
+
+1. If you are accessing this page from the VM, it should default to **Linux**. Otherwise, select the tab.
+
+1. Click **Download** to start downloading the agent. This is typically saved in the *Downloads* folder
+
+    ![Download VSTS agent](images/downloadvstsagent.png)
+
+1. Open a terminal window and enter the following commands one-by-one
+
+    ````cmd
+    mkdir vstsagent
+    cd vstsagent
+    tar -zxvf ../Downloads/vsts-agent-linux-x64-2.126.0.tar.gz
+    ````
+1. Once the files are extracted, run `./config.sh` to configure the agent. You will need to enter the VSTS URL and provide your PAT
+
+1. After you have configured, start the agent by running the following command `./run.sh`
