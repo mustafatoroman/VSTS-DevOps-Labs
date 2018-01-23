@@ -160,7 +160,7 @@ Let us create a Project in Octopus to deploy the package to **Azure App Service*
 
 1. Once the project is created, click **Define your deployment process**. The [deployment process](https://octopus.com/docs/deploying-applications/deployment-process) is like a recipe for deploying your software. You define the recipe by adding steps and variables to a Project. Each step contains a specific action (or set of actions) that is executed as part of the deployment process each time your software is deployed.
 
-   ![](images/Define Process.png)
+   ![](images/DefineProcess.png)
 
 1. Click on **ADD STEP** to see a list of built-in step templates, custom step templates, and community contributed step templates.
 
