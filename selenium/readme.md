@@ -1,6 +1,6 @@
 # Continuous Testing of a Web App with Selenium in VSTS
 
-## Overview
+## Introduction
 
 [Selenium](http://www.seleniumhq.org/) is a portable open source software-testing framework for web applications. It has the capability to operate on almost every operating system. It supports all modern browsers and multiple languages including .NET (C#), Java.
 
