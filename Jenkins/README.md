@@ -137,7 +137,7 @@ This lab covers both the approaches and the following tasks will be performed
 
    ![Configuring VSTS Git URL](images/jenkins-vstsrepo.png)
 
-   **Note:** The VSTS Git repos are private. So you will need to provide the user credentials to access the repository. If you have not set the Git credentials, you can so from the VSTS. Select the **Clone** link, provide the user name and password and then click on the **OK** button.
+   **Note:** The VSTS Git repos are private and hence will need to provide the user credentials to access the repository. If you have not configured the Git credentials, it can be done from the VSTS. Select the **Clone** option, provide the user name and password and then click on the **OK** button.
 
    ![Generating Git Credentials](images/vsts-generategitcreds.png)
 
