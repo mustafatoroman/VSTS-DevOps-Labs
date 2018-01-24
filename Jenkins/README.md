@@ -181,77 +181,80 @@ This lab covers both the approaches and the following tasks will be performed
 
 1. Click on the **Test Results** option to view the results of the unit tests that were included in the build definition.
 
-## Approach 2: Using Jenkins without the VSTS Build
+## Approach 1: Using Jenkins without the VSTS Build
 
-In this section, we will cover the first approach. We will run Jenkins separately. We will configure a service hook in VSTS to trigger a Jenkins build whenever a code is pushed to a particular branch.
+In this section, the Jenkins will be configured to run separately. A service hook will be configured in VSTS to trigger a Jenkins build whenever source code changes are pushed to a particular branch.
 
-1. Go to your VSTS project page and navigate to the **Admin** | **Service Hooks** page
+1. To configure the service hook, navigate to the VSTS team project page, click on the Settings icon and choose the **Service Hooks** option
 
     ![Navigate to service hooks page](images/servicehooks.png)
 
-1. Select **Create subscription** button
+1. On the **Service Hooks** screen, click on the **Create subscription** button
 
-1. In the *New subscriptions dialog* select **Jenkins** and click **Next**
+1. In the *New Service Hook Subscriptions* screen, click on the **Jenkins** option and then click the **Next** button.
 
    ![Create a new subscription](images/vsts-createjenkinsservice.png)
 
-1. Select **Code pushed**  for the **Trigger on this of type event**
+1. Select the **Code pushed** option for the **Trigger on this type of event**
 
-1. Choose the repository and branch and Select **Next**
+1. Select the MyShuttleDocker as the **Repository**, master as **Branch** and then click on the **Next** button.
 
    ![VSTS - Trigger Code Pushed](images/vsts-jenkinssubscription1.png)
 
-1. In the next page, select **Trigger generic build** for the perform action field
+1. Provide the following details in the **Select and configure the action to perform** screen 
+   1. In the **Perform this action** field, select the **Trigger generic build** option
 
-1. Enter the URL of the Jenkins server in **http://{ip address or the host name}**  format
+   1. In the **Jenkins base URL** field, Provide the URL of the Jenkins server in the *http://{ip address or the host name}* format
 
-1. Enter the **User name** and **Password** that you have setup for Jenkins
+   1. In the **User name** and **User API token (or password)** fields, provide the user name and password already configured for Jenkins
 
-1. Select **Test** to check the settings. If the settings are correct, click **Finish** to save and exit
+1. Click on the **Test** button to validate the configuration and then click on the **Finish** button to complete the subscription.
 
    ![VSTS - Jenkins Info](images/vsts-jenkinssubscription2.png)
 
-Now you can try making a change and commit your code. Upon commit,VSTS will notify Jenkins to initiate a new build.
+The VSTS will now automatically notify Jenkins to initiate a new build whenever any source code changes are committed on the repository. 
 
-## Approach 2: Wrapping Jenkins Job within VSTS Build
+## Approach 2: Wrapping Jenkins Job within the VSTS Build
 
-We will cover the second approach in this section. We will wrap the Jenkins job within a Team Build. The key benefit taking this approach is the end to end traceability from work item to code to build and release can be maintained
+In this section, Jenkins will be included as a job within a VSTS Team Build. The key benefit of this approach is the end-to-end traceability from the work items to the source code to the build and release provided by the VSTS.
 
-First, we will need to create an endpoint to the Jenkins server
+To begin, an endpoint to the Jenkins Server for communication with VSTS will be configured.
 
-1. From the **Admin | Services** tab, select the **New Service Endpoint | Jenkins** button to create a new endpoint
+1. In the **Admin | Services** section, click on the **New Service Endpoint | Jenkins** option to create a new endpoint.
 
-1. Provide the server URL and the user name and password to connect to the server. The server URL is in http://[server IP address or DNS name] format. Click **Verify Connection** to validate the entries and to confirm that VSTS is able to reach the Jenkins server
+1. In the **Add new Jenkins Connection** screen, provide a connection name, Jenkins server URL in the  *http://[server IP address or DNS name]* format, Jenkins user name and password. Click on the **Verify Connection** button to validate the configuration and then click on the **Ok** button.
 
    ![Jenkins Endpoint](images/jenkinsendpoint.png)
 
-1. Select **Builds** from the **Build and Release** help and select **+New** to create a new build Definition**
+The next step would be to configure the build definition.
 
-1. You will notice that there is a **Jenkins** template out-of-the-box. Select the template and click **Apply**
+1. Click on the **Build and Release** section, select the Builds tab and click on the **+New** button to create a new build Definition
+
+1. In the Choose a template window, select the out-of-the-box **Jenkins** template and click on the **Apply** button
 
     ![Jenkins Template](images/jenkinsbuildtemplate.png)
 
-1. In the *Build process* settings, select the Jenkins service endpoint that you created and enter **MyShuttle** for Jenkins Job Name.
+1. In the *Process* step, provide a name for the definition, select Hosted Linux Preview as the Agent Queue, provide a name for the Job and then select the Jenkins service endpoint created earlier.
 
     ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings.png)
 
-1.  Next, select the **Get Sources** task. Since, we  are only triggering a Jenkins job from the build, there is no need to download the code to the VSTS build agent. Select **Advanced Options** and check the "Don't sync sources** option
+1.  Next, select the **Get Sources** step. Since Jenkins is being used for the build, there is no need to download the source code to the VSTS build agent. Enable the **Advanced settings** option and select the **Don't sync sources** option.
 
     ![Get Sources Settings in Team Build](images/vsts-getsourcessettings.png)
 
-1. Next, select the **Queue Jenkins Job** task. This task queues the job on the Jenkins server. Make sure that the services endpoint and the job name are correct.  You will see the two options checked- leave them as-is. 
+1. Next, select the **Queue Jenkins Job** step. This task queues the job on the Jenkins server. Make sure that the services endpoint and the job name are correct. The two options available at this step will be left unchanged. 
 
      ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings1.png)
 
->The **Capture console output and wait for completion** option when selected, will capture the output of the Jenkins build console when the build runs, and also make the build  wait for the Jenkins Job to complete and return whether the job succeeded or failed. The **Capture pipeline output and wait for pipeline completion** option is very similar but applies to Jenkins pipelines (a build that has more than one job nested together). 
+>The **Capture console output and wait for completion** option, when selected, will capture the output of the Jenkins build console when the build runs. The build will wait until the Jenkins Job is completed. The **Capture pipeline output and wait for pipeline completion** option is very similar but applies to Jenkins pipelines (a build that has more than one job nested together). 
 
-1. When the build is complete, the **Jenkins Download Artifacts** task will download the build artifacts produced by the Jenkins job to the staging directory
+1. The **Jenkins Download Artifacts** task will download the build artifacts from the Jenkins job to the staging directory
 
     ![Download Jenkins Artifact](images/downloadjenkinsartifact.png)
 
-1. Finally, we will publish the artifacts to VSTS. 
+1. The **Publish Artifact drop** will publish to the VSTS. 
 
-1. Click **Save & queue** to save the build definition and start a new build. 
+1. Click on the **Save & queue** button to complete the build definition configuration and initiate a new build. 
 
 ## Deploying Jenkins Artifacts with Release Management
 
