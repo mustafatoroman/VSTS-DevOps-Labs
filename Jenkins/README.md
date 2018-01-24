@@ -17,7 +17,7 @@ There are two ways to integrate VSTS with Jenkins
 This lab covers both the approaches and the following tasks will be performed
 
 * Provision Jenkins on Azure VM using an Azure Marketplace Jenkins Template
-* Configure Jenkins to work with Maven and VSTS. 
+* Configure Jenkins to work with Maven and VSTS.
 * Create a build definition in Jenkins
 * Configure VSTS to integrate with Jenkins
 * Setup Release Management in VSTS to deploy artifacts from Jenkins
@@ -35,7 +35,7 @@ This lab covers both the approaches and the following tasks will be performed
 ## Setting up the VSTS project
 
 1. Use [VSTS Demo Generator](https://vstsdemogenerator.azurewebsites.net/?name=MyShuttleDocker&templateid=77373) to provision a team project on the VSTS account
-    
+
     ![VSTS Demo Gen](images/vstsdemogen-1.png)
 
 1. Select **MyShuttleDocker** for the template
@@ -62,14 +62,13 @@ This lab covers both the approaches and the following tasks will be performed
     ````
     ![Connecting from Putty](images/ssh2.png)
 
-   > To initiate the above command, the Putty.exe needs to be placed in the path selected in the Command Prompt or the absolute path of the Putty.exe need to be provided in the command. 
-
+   > To initiate the above command, the Putty.exe needs to be placed in the path selected in the Command Prompt or the absolute path of the Putty.exe need to be provided in the command.
 
 1. Login with the user name and password that was provided during the provisioning of the VM.
 
-1. Once the connection is successful, open a browser on the host machine and navigate to the URL [http://localhost:8080](http://localhost:8080). The **Getting Started** page for Jenkins will be displayed. 
+1. Once the connection is successful, open a browser on the host machine and navigate to the URL [http://localhost:8080](http://localhost:8080). The **Getting Started** page for Jenkins will be displayed.
 
-1. The initial password needs to be provided in the **Getting Started** screen to unlock Jenkins. For security reasons, Jenkins will generate a password and save it in a file on the server. 
+1. The initial password needs to be provided in the **Getting Started** screen to unlock Jenkins. For security reasons, Jenkins will generate a password and save it in a file on the server.
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
@@ -110,7 +109,7 @@ This lab covers both the approaches and the following tasks will be performed
 
 1. Select the **Available** tab and search for **maven-plugin** in the filter box
 
-1. Select the **Maven Integration Plugin** option and click on the **Install without restart** button to install the plugin. 
+1. Select the **Maven Integration Plugin** option and click on the **Install without restart** button to install the plugin.
 
     ![Install Maven](images/installmavenplugin.png)
 
@@ -201,7 +200,7 @@ In this section, the Jenkins will be configured to run separately. A service hoo
 
    ![VSTS - Trigger Code Pushed](images/vsts-jenkinssubscription1.png)
 
-1. Provide the following details in the **Select and configure the action to perform** screen 
+1. Provide the following details in the **Select and configure the action to perform** screen
    1. In the **Perform this action** field, select the **Trigger generic build** option
 
    1. In the **Jenkins base URL** field, Provide the URL of the Jenkins server in the *http://{ip address or the host name}* format
@@ -212,7 +211,7 @@ In this section, the Jenkins will be configured to run separately. A service hoo
 
    ![VSTS - Jenkins Info](images/vsts-jenkinssubscription2.png)
 
-The VSTS will now automatically notify Jenkins to initiate a new build whenever any source code changes are committed on the repository. 
+The VSTS will now automatically notify Jenkins to initiate a new build whenever any source code changes are committed on the repository.
 
 ## Approach 2: Wrapping Jenkins Job within the VSTS Build
 
@@ -238,23 +237,23 @@ The next step would be to configure the build definition.
 
     ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings.png)
 
-1.  Next, select the **Get Sources** step. Since Jenkins is being used for the build, there is no need to download the source code to the VSTS build agent. Enable the **Advanced settings** option and select the **Don't sync sources** option.
+1. Next, select the **Get Sources** step. Since Jenkins is being used for the build, there is no need to download the source code to the VSTS build agent. Enable the **Advanced settings** option and select the **Don't sync sources** option.
 
     ![Get Sources Settings in Team Build](images/vsts-getsourcessettings.png)
 
-1. Next, select the **Queue Jenkins Job** step. This task queues the job on the Jenkins server. Make sure that the services endpoint and the job name are correct. The two options available at this step will be left unchanged. 
+1. Next, select the **Queue Jenkins Job** step. This task queues the job on the Jenkins server. Make sure that the services endpoint and the job name are correct. The two options available at this step will be left unchanged.
 
      ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings1.png)
 
->The **Capture console output and wait for completion** option, when selected, will capture the output of the Jenkins build console when the build runs. The build will wait until the Jenkins Job is completed. The **Capture pipeline output and wait for pipeline completion** option is very similar but applies to Jenkins pipelines (a build that has more than one job nested together). 
+>The **Capture console output and wait for completion** option, when selected, will capture the output of the Jenkins build console when the build runs. The build will wait until the Jenkins Job is completed. The **Capture pipeline output and wait for pipeline completion** option is very similar but applies to Jenkins pipelines (a build that has more than one job nested together).
 
 1. The **Jenkins Download Artifacts** task will download the build artifacts from the Jenkins job to the staging directory
 
     ![Download Jenkins Artifact](images/downloadjenkinsartifact.png)
 
-1. The **Publish Artifact drop** will publish to the VSTS. 
+1. The **Publish Artifact drop** will publish to the VSTS.
 
-1. Click on the **Save & queue** button to complete the build definition configuration and initiate a new build. 
+1. Click on the **Save & queue** button to complete the build definition configuration and initiate a new build.
 
 ## Deploying Jenkins Artifacts with Release Management
 
@@ -286,17 +285,15 @@ The next step is to configure the VSTS Release Management to fetch and deploy th
 
 1. You can refer to the [Deploying Tomcat+MySQL application to Azure with VSTS](../tomcat/) if you want to continue with the deployment.
 
-
 ## Logging into Jenkins with the default credentials
 
 1. To log in to Jenkins when you did not get a chance to configure the initial admin, you can use the default user name **admin**
 
-1. Copy and paste the password text from `\var\lib\jenkins\secrets\initialAdminPassword` 
+1. Copy and paste the password text from `\var\lib\jenkins\secrets\initialAdminPassword`
 
-1. To change password, click on the user name on the top-right 
+1. To change password, click on the user name on the top-right
 
 1. Select **Configure**. Scroll down to the **password** section. Specify a new password and click **Save**
-
 
 # Appendix
 
@@ -306,12 +303,11 @@ The next step is to configure the VSTS Release Management to fetch and deploy th
 
     ![Manage Jenkins](images/manage-jenkins2.png)
 
-1. Select the **Available** tab. 
+1. Select the **Available** tab.
 
-1. Enter **Git plugin** in the filter textbox 
+1. Enter **Git plugin** in the filter textbox
 
 1. Select **Git plugin** in the search list and select **Install without Restart**
-
 
 ## Installing VSTS Private agent
 
