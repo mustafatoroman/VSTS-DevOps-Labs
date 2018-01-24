@@ -1,33 +1,42 @@
 # Continuous Testing of a Web App with Selenium in VSTS
 
-## Introduction
+## Overview
 
-[Selenium](http://www.seleniumhq.org/) is a portable open source software-testing framework for web applications. It has the capability to operate on almost every operating system. It supports all modern browsers and multiple languages including .NET (C#), Java.
+[Selenium](http://www.seleniumhq.org/) is a highly  portable open source software-testing framework for web applications that runs on multiple platforms as well as browsers. It therefore allows automation engineers the ease of writing code without worrying about the platform on which it will run.
 
-In this lab, you will learn how to execute selenium testcases on a C# web application as part of the VSTS Continuous Delivery pipeline.
+### Why Selenium?
+Applications are written in a number of languages. One of the challenges faced by automated testers is integrating the automation tools with the development environment for Continuous Integration (CI). With Selenium bindings for Java, .NET, Ruby, Perl, Python, PHP, Groovy and JavaScript, it is very easy to integrate with the development environment.
+In this lab, we will be learning how to execute Selenium testcases on a C# web application as part of the VSTS Continuous Delivery (CD) pipeline.
 
 If you are not familiar with creating Selenium UI tests in Visual Studio, you may refer to this lab  [click here](https://almvm.azurewebsites.net/labs/vsts/selenium/)
 
 ## Pre-requisites
 
-1. **Microsoft Azure Account:** You need a valid and active azure account for the lab.
+1. Valid and active **Microsoft Azure** account.
 
-1. You need a **Visual Studio Team Services Account** and [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate)
+1. Valid **VSTS** account. Create a new account from [here.](https://docs.microsoft.com/en-us/vsts/accounts/create-account-msa-or-work-student)
+
+1. [Personal Access Token](https://docs.microsoft.com/en-us/vsts/accounts/use-personal-access-tokens-to-authenticate) (PAT)
 
 ## Setting up the Environment
 
-1. Click **Deploy To Azure** to provision a Windows Server 2016 virtual machine along with SQL Express 2017 and browsers - Chrome and FireFox.
+1. Click on the **Deploy to Azure** button to initiate the configuration
 
    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FVSTS-DevOps-Labs%2Fmaster%2Fselenium%2Farm%2520template%2Fazuredeploy.json"> <img src="http://azuredeploy.net/deploybutton.png">
    </a>
 
-1. It should take approximately 20-25 minutes to provision the resources. Once the deployment is successful, you will see the resources as shown.
-
+1. In the Custom deployment window, select the **Subscription** type, leave the default selection for the resource group, provide the name for **Resource Group** and select the **Location**. Provide the **Virtual Machine Name**, accept the **Terms and Conditions** and click on the **Purchase** button to provision the following resources:
+   - Windows Server 2016 VM with SQL Express 2017 and browsers (Chrome and FireFox)
+   
+   Screenshot to be added
+   
+1. Provisioning of the required resources will take approximately 20-25 minutes. Upon successful deployment we can see the resources as shown below 
+   
    ![](images/azure_resources.png)
 
 ## Setting up the VSTS project
 
-1. Use [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=Selenium&templateid=77367) to provision the project on your VSTS account.
+1. We will be using [VSTS Demo Data Generator](https://vstsdemogenerator.azurewebsites.net/?name=Selenium&templateid=77367) to provision the project on your VSTS account.
 
     ![](images/VSTSDemogenerator.png)
 
@@ -80,17 +89,17 @@ In this exercise, we will execute the **registration script** on the VM to assoc
 
    ![](images/configure_deploymentgroup.png)
 
-1. When prompt -**Enter User account to use for the service (press enter for NT AUTHORITY\SYSTEM) >** is displayed, hit **Enter** to configure the service to run under **NT AUTHORITY\SYSTEM** account.
+1. When prompted -**Enter User account to use for the service (press enter for NT AUTHORITY\SYSTEM) >** is displayed, hit **Enter** to configure the service to run under **NT AUTHORITY\SYSTEM** account.
 
    ![](images/userserviceaccount-dg.png)
 
-1. Refresh your VSTS Deployment Groups page, click the created Deployment Group and you will notice the online status, health status and the associated tags of the VM.
+1. Refresh your VSTS Deployment Groups page, click the created Deployment Group and we will notice the online status, health status and the associated tags of the VM.
 
    ![](images/configure_deploymentgroup2.png)
 
 ## Exercise 3: Configure agent on the VM
 
-Let us configure a ***private*** agent on this VM, since Selenium requires the agent to be run in **interactive** mode to execute the UI tests.
+Let us configure a ***private*** agent on this VM, as Selenium requires the agent to run in **interactive** mode to execute the UI tests.
 
 1. Go to the VM and open the folder **C:\VSTSwinAgent**.
 
@@ -109,7 +118,7 @@ Let us configure a ***private*** agent on this VM, since Selenium requires the a
 
 ## Exercise 4: Configure Release
 
-The target machine is available in the deployment group to deploy the application and run selenium testcases. The release definition uses **[Phases](https://docs.microsoft.com/en-us/vsts/build-release/concepts/process/phases)** to deploy to target servers.
+The target machine is available in the deployment group to deploy the application and run selenium testcases. The release definition uses **[Phases](https://docs.microsoft.com/en-us/vsts/build-release/concepts/process/phases)** to deploy to the target servers.
 
 1. Go to **Releases** under **Build and Release** tab. Select **Selenium** release definition and **Edit**.
 
@@ -129,7 +138,7 @@ The target machine is available in the deployment group to deploy the applicatio
 
    - **Database deploy phase**: In this phase, we use [**SQL Server Database Deploy**](https://github.com/Microsoft/vsts-tasks/blob/master/Tasks/SqlDacpacDeploymentOnMachineGroup/README.md) task to deploy [**dacpac**](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications) file to the DB server.
 
-   - **Selenium tests execution**: Executing **UI testing** as part of the release process is a great way of detecting unexpected changes, and need not be difficult. In this phase, we will execute Selenium tests on the deployed web application. The below tasks describes using Selenium to test the website in the release pipeline.
+   - **Selenium tests execution**: Executing **UI testing** as part of the release process is a great way of detecting unexpected changes, and is easy to accomplish. In this phase, we will execute Selenium tests on the deployed web application. The below tasks describe using Selenium to test the website in the release pipeline.
 
      - **Deploy Test Agent**: The [Deploy Test agent](https://github.com/Microsoft/vsts-tasks/blob/master/Tasks/DeployVisualStudioTestAgent/README.md) task will deploy the test agent to the VM. The test agent is used to run distributed tests like Coded UI and Selenium.
      - **Run Functional tests**: This [task](https://github.com/Microsoft/vsts-tasks/blob/master/Tasks/RunDistributedTests/README.md) uses **vstest.console.exe** to execute the selenium testcases.
@@ -158,13 +167,13 @@ In this exercise, we will trigger the **VSTS build** to compile the Selenium C# 
 
    ![](images/buildqueue2.png)
 
-1. Once the build completes, the release will be triggered. Navigate to **Releases** tab to see the deployment in-progress.
+1. Once the build is complete, the release will be triggered. Navigate to **Releases** tab to see the deployment in-progress.
 
    ![](images/releasequeue.png)
 
 1. When **Selenium test execution** phase starts, connect back to the VM provisioned earlier to see UI tests execution.
 
-   >Note : It takes approximately 8 minutes to deploy the test agent for the first time on the VM. Once this task is complete, you can connect to the VM to see the actual test execution.
+   >Note : It takes approximately 8 minutes to deploy the test agent for the first time on the VM. Once this task is complete, we can connect to the VM to see the actual test execution.
 
    ![](images/Releaseprogress.png)
 
