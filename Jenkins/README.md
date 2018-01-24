@@ -42,7 +42,7 @@ This lab covers both the approaches and the following tasks will be performed
 
     ![VSTS Demo Gen](images/vstsdemogen-2.png)
 
-    **Note:** Using the VSTS Demo Generator link will automatically select the MuShuttleDocker template in the demo generator for the team project creation. To use other team project templates, use the alternate link provided below:  https://vstsdemogenerator.azurewebsites.net/
+    > Using the VSTS Demo Generator link will automatically select the MuShuttleDocker template in the demo generator for the team project creation. To use other team project templates, use this alternate link:  https://vstsdemogenerator.azurewebsites.net/
 
 ## Setting up the Jenkins VM
 
@@ -58,11 +58,11 @@ This lab covers both the approaches and the following tasks will be performed
 
 1. Jenkins, by default, listens on port 8080 using HTTP. To configure a secure HTTPS connection, an SSL certificate will be required. If HTTPS communication is not being configured, the best way to ensure the sign-in credentials are not leaked due to a "Man-in-the-middle" attack is by logging-in using the SSH tunneling. An SSH tunnel is an encrypted tunnel created through a SSH protocol connection, that can be used to transfer unencrypted traffic over an unsecured network. To initiate a SSH tunnel, the following command needs to be run from a Command Prompt.
     ````cmd
-    putty.exe -ssh -L 8080:localhost:8080 <username>@<ip address>
+   putty.exe -ssh -L 8080:localhost:8080 <username>@<ip address>
     ````
     ![Connecting from Putty](images/ssh2.png)
 
-    **Note:** To initiate the above command, the Putty.exe needs to be placed in the path selected in the Command Prompt or the absolute path of the Putty.exe need to be provided in the command. 
+   > To initiate the above command, the Putty.exe needs to be placed in the path selected in the Command Prompt or the absolute path of the Putty.exe need to be provided in the command. 
 
 
 1. Login with the user name and password that was provided during the provisioning of the VM.
@@ -73,7 +73,7 @@ This lab covers both the approaches and the following tasks will be performed
 
    ![Jenkins Initial Password](images/jenkinsinitialemptypwd.png)
 
-   **Note:** At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below).
+    > At the time of writing this lab, an open issue in Jenkins was noted where the setup wizard would not resume after restart, skipping some of the steps listed below. If you do not see the screen above, steps 5 to 7 will not work. The workaround is to use the default user name *admin* with the initial admin password (explained in step #7 below).
 
 1. Return to the **Putty** terminal and type the following command to open the log file that contains the password. Copy the password
     >sudo vi /var/lib/jenkins/secrets/initialAdminPassword
@@ -84,13 +84,13 @@ This lab covers both the approaches and the following tasks will be performed
 
     ![Unlock Jenkins - First Time](images/jenkinsinitialpwd.png)
 
-    Jenkins has a vast ecosystem with a strong and active open source community users contributing hundreds of useful plugins. While configuring Jenkins, you can either install the most commonly used plugins or pick the plugins that you want.
+    > Jenkins has a vast ecosystem with a strong and active open source community users contributing hundreds of useful plugins. While configuring Jenkins, you can either install the most commonly used plugins or pick the plugins that you want.
 
-1. The Maven plugin is also required but will be installed later. For now, we will go with the suggested plugins. Click on the **Install suggested plugins** to initiate the configuration.
+1. The Maven plugin is also required but will be installed later. Click on the **Install suggested plugins** option to initiate the configuration.
 
     ![Customize Jenkins Plugins](images/customizejenkins-plugins.png)
 
-1. You will need to create a new *Admin* user for Jenkins. Provide a user name and password and click on the **Continue** button.
+1. A new *Admin* user needs to be created for Jenkins. Provide a user name and password and click on the **Continue** button.
 
     ![Create Admin User for Jenkins](images/firstadminuser.png)
 
@@ -100,7 +100,7 @@ This lab covers both the approaches and the following tasks will be performed
 
 ## Installing and Configuring Maven
 
- Starting with Jenkins version 2, Maven plugin is not installed by default. You will need to install this manually
+ > Starting with Jenkins version 2, Maven plugin is not installed by default. You will need to install this manually
 
 1. Select the **Manage Jenkins** option on the main page of the Jenkins portal. This will take you to the Manage Jenkins page, the centralized one-stop-shop for all the Jenkins configuration. From this screen, you can configure the Jenkins server, install and upgrade plugins, keep track of system load, manage distributed build servers, and more!
 
@@ -118,7 +118,7 @@ This lab covers both the approaches and the following tasks will be performed
 
     ![Global Tool Configuration](images/manage-tools-config.png)
 
-1. Jenkins provides great out-of-the-box support for Maven. Since the Maven is not yet installed, it can be manually installed by extracting the ***tar*** file located in a shared folder. Alternatively, you can let Jenkins do all the hard work and download Maven for you. When the **Install automatically** option is selected, Jenkins will download and install Maven from the Apache website when a build job requires it, first time.
+1. Jenkins provides out-of-the-box support for Maven. Since the Maven is not yet installed, it can be manually installed by extracting the ***tar*** file located in a shared folder. Alternatively, Jenkins can install Maven automatically. When the **Install automatically** option is selected, Jenkins will download and install Maven from the Apache website when a build job requires it, first time.
 
     We will install Maven version 3.5, the latest version at the time the lab is written
 
@@ -228,13 +228,13 @@ To begin, an endpoint to the Jenkins Server for communication with VSTS will be 
 
 The next step would be to configure the build definition.
 
-1. Click on the **Build and Release** section, select the Builds tab and click on the **+New** button to create a new build Definition
+1. Click on the **Build and Release** hub, select the Builds section and click on the **+New** button to create a new build Definition
 
 1. In the Choose a template window, select the out-of-the-box **Jenkins** template and click on the **Apply** button
 
     ![Jenkins Template](images/jenkinsbuildtemplate.png)
 
-1. In the *Process* step, provide a name for the definition, select Hosted Linux Preview as the Agent Queue, provide a name for the Job and then select the Jenkins service endpoint created earlier.
+1. In the *Process* step, provide a name for the definition, select Hosted Linux Preview as the Agent Queue, provide **MyShuttle** as the Job name and then select the Jenkins service endpoint created earlier.
 
     ![Jenkins Settings in Team Build](images/vsts-buildjenkinssettings.png)
 
@@ -258,23 +258,25 @@ The next step would be to configure the build definition.
 
 ## Deploying Jenkins Artifacts with Release Management
 
-Next, we will configure Visual Studio VSTS Release Management to fetch and deploy the artifacts produced by the build.
+The next step is to configure the VSTS Release Management to fetch and deploy the artifacts produced by the build.
 
-1. As we are deploying to Azure, we will need to create an endpoint to Azure. You should also create an endpoint to Jenkins, if you have not done it before
+1. Since the deployment is being done to Azure, an endpoint to Azure will be configured. An endpoint to Jenkins server will also be configured, if not configured earlier.
 
-1. After you have created the endpoints, select the **Build & Release** hub and select **+ Create a new Release definition** to start creating a new release definition
+1. After the endpoint creation, click on the **Build & Release** hub and then select the **Releases** section. Click on the **+ Create a new Release definition** button to initiate a new release definition
 
-1. We will use the **Azure App Service Deployment** template as we are trying to publish a web application
+1. Since a web application will be published to Azure, the **Azure App Service Deployment** template will be used for the configuration.
 
    ![New Release Definition](images/newreleasedefintion.png)
 
-1. We will name the default environment as **Dev**
+1. The default environment for deployment will be named as **Dev**
 
    ![New Environment](images/rm_environment.png)
 
-1. We will link this release definition to the MyShuttle build on Jenkins. Select **+Add** to add an artifact
+1. To link the release definition with the MyShuttle build on Jenkins, click on the **+Add** button to add an artifact
 
-1. Select **Jenkins** for the *Source type*. Select the Jenkins endpoint you created above and enter **MyShuttle** for the *Source(Job)* - Note this should map to the project name that you have configured in Jenkins
+1. In the **Add artifact** screen, Select **Jenkins** as the *Source type*, select the Jenkins endpoint configured earlier and provide **MyShuttle** for the *Source(Job)*
+
+   >The Source(Job) should map to the project name configured in Jenkins
 
 1. If you have configured Jenkins server and the source correctly, you will get a message showing the output of the build, in this case it should be ***myshuttledev.war***
 
