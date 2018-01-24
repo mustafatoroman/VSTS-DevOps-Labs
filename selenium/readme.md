@@ -6,6 +6,7 @@
 
 ### Why Selenium?
 Applications are written in a number of languages. One of the challenges faced by automated testers is integrating the automation tools with the development environment for Continuous Integration (CI). With Selenium bindings for Java, .NET, Ruby, Perl, Python, PHP, Groovy and JavaScript, it is very easy to integrate with the development environment.
+
 In this lab, we will be learning how to execute Selenium testcases on a C# web application as part of the VSTS Continuous Delivery (CD) pipeline.
 
 If you are not familiar with creating Selenium UI tests in Visual Studio, you may refer to this lab  [click here](https://almvm.azurewebsites.net/labs/vsts/selenium/)
@@ -28,7 +29,7 @@ If you are not familiar with creating Selenium UI tests in Visual Studio, you ma
 1. In the Custom deployment window, select the **Subscription** type, leave the default selection for the resource group, provide the name for **Resource Group** and select the **Location**. Provide the **Virtual Machine Name**, accept the **Terms and Conditions** and click on the **Purchase** button to provision the following resources:
    - Windows Server 2016 VM with SQL Express 2017 and browsers (Chrome and FireFox)
    
-   Screenshot to be added
+   ![](images/customdeploy.png)
    
 1. Provisioning of the required resources will take approximately 20-25 minutes. Upon successful deployment we can see the resources as shown below 
    
