@@ -137,11 +137,11 @@ This lab covers both the approaches and the following tasks will be performed
 
    ![Configuring VSTS Git URL](images/jenkins-vstsrepo.png)
 
-   **Note:** The VSTS Git repos are private and hence will need to provide the user credentials to access the repository. If you have not configured the Git credentials, it can be done from the VSTS. Select the **Clone** option, provide the user name and password and then click on the **OK** button.
+   **Note:** The VSTS Git repos are private and hence will need the user credentials to be provided to access the repository. If the Git credentials are not yet configured, it can be done from the VSTS. Select the **Clone** option, provide the user name and password and then click on the **OK** button.
 
    ![Generating Git Credentials](images/vsts-generategitcreds.png)
 
-1. Select **Add | Jenkins** to add a new credential. Enter the user name and password created in the previous step and click **Add** to close the wizard
+1. Select the **Add | Jenkins** option to add a new credential. provide the user name and password created in the previous step and click on the **Add** button to close the wizard
 
     ![Adding Credentials to Jenkins](images/jenkinscredentials.png)
 
@@ -149,39 +149,39 @@ This lab covers both the approaches and the following tasks will be performed
 
    ![VSTS Git config in Jenkins](images/jenksaddvstsgit.png)
 
-1. The source code for this application has both unit tests and UI tests. We will include the unit tests but skip the UI tests from running now.
+1. The source code for the application has both unit tests and UI tests. For the lab, the unit tests will be included but the UI tests will be skipped.
 
-1. Scroll down to the **Build** section. Enter the following text in the **Goals and Options** field
+1. Scroll down to the **Build** section. Provide the following text in the **Goals and Options** field
 
    >package -Dtest=FaresTest,SimpleTest
 
-1. Click **Save** to navigate to the main page of the project you just created
+1. Click on the **Save** button to navigate to the main page of the project that was just created
 
    ![Build Settings in Jenkins](images/jenkins-buildsettings.png)
 
-1. The last configuration that we will do for this lab is to add a *Post-build* action to publish the artifacts. Scroll down to **Post-Build Actions**  section, click **Add post-build action** and select **Archive the artifacts**
+1. The final configuration in this lab is to add a *Post-build* action to publish the artifacts. Scroll down to the **Post-Build Actions**  section, click on the **Add post-build action** option and select the option **Archive the artifacts** from the list.
 
    ![Post Build Action](images/jenkinspostbuildaction.png)
 
-1. Enter  **target/*.war** in the text box. Click **Save** to save the settings and return to the project page
+1. In the **Files to archive** test box, provide **target/*.war** and click the **Save** button to complete the configuration and return to the project page
 
    ![Archive War](images/jenkinsarchiveartifacts.png)
 
-1. We have completed all the necessary configuration and Select **Build Now** to start an Ad-hoc build
+1. Click on the **Build Now** option to start an adhoc build
 
-1. You will notice the build progress just below the left side navigation menu
+1. The build progress will be displayed below the left side navigation menu
 
    ![Running Ad-hoc Build](images/adhocbuild.png)
 
-1. You can select the build number to get into the details of the build including the build artifacts, in this case, the WAR file for the project.
+1. To view the build details including the build artifacts namely the .war file, click on the build number.
 
    ![Build Details](images/builddetails.png)
 
    ![Build Artifacts](images/buildmodules.png)
 
-1. Select the **Test Results** links if you want to see the results of the unit tests that were included in the build definition.
+1. Click on the **Test Results** option to view the results of the unit tests that were included in the build definition.
 
-## Approach 1: Running Jenkins without VSTS Build
+## Approach 2: Using Jenkins without the VSTS Build
 
 In this section, we will cover the first approach. We will run Jenkins separately. We will configure a service hook in VSTS to trigger a Jenkins build whenever a code is pushed to a particular branch.
 
