@@ -1,4 +1,4 @@
-# Feature Flag for an API using Azure Functions
+# Deploying Azure Functions using VSTS
 
 ## Overview
 <!---
