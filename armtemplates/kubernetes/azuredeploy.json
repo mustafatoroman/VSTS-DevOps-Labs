@@ -146,9 +146,9 @@
         },
         "kubernetesVersion": {
             "type": "string",
-            "defaultValue": "1.8.1",
+            "defaultValue": "1.8.7",
             "allowedValues": [
-                "1.8.1"
+                "1.8.7"
             ],
             "metadata": {
                 "description": "The version of Kubernetes."
